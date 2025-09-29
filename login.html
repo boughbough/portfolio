@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Connexion</title>
-  <title>identifiants: admin, mdp: 1234</title>
 
   <style>
     body {
@@ -15,7 +14,13 @@
       background-color: #f4f4f4;
     }
 
-    .login-box {
+    .container {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+    }
+
+    .login-box, .info-box {
       background: white;
       padding: 30px;
       border-radius: 8px;
@@ -56,17 +61,45 @@
       text-align: center;
       margin-top: 10px;
     }
+
+    .info-box h3 {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .info-box p {
+      font-size: 1em;
+      margin: 10px 0;
+      line-height: 1.4em;
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="login-box">
-    <h2>Connexion</h2>
-    <form onsubmit="return login(event)">
-      <input type="text" id="username" placeholder="Nom d'utilisateur" required>
-      <input type="password" id="password" placeholder="Mot de passe" required>
-      <button type="submit">Se connecter</button>
-      <div class="error" id="error-message"></div>
-    </form>
+  <div class="container">
+    <!-- Formulaire de connexion -->
+    <div class="login-box">
+      <h2>Connexion</h2>
+      <form onsubmit="return login(event)">
+        <input type="text" id="username" placeholder="Nom d'utilisateur" required>
+        <input type="password" id="password" placeholder="Mot de passe" required>
+        <button type="submit">Se connecter</button>
+        <div class="error" id="error-message"></div>
+      </form>
+    </div>
+
+    <!-- Boîte d'information -->
+    <div class="info-box">
+      <h3>Identifiants de test</h3>
+      <p><strong>Nom d'utilisateur :</strong> admin</p>
+      <p><strong>Mot de passe :</strong> 1234</p>
+    </div>
   </div>
 
   <script>
@@ -76,7 +109,6 @@
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
 
-      // Identifiants définis ici
       const validUsername = "admin";
       const validPassword = "1234";
 
