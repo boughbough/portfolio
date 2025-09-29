@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mon Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <script>
+    // Protection par sessionStorage
+    if (sessionStorage.getItem("auth") !== "ok") {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <header>
+    <h1>Mon Portfolio</h1>
+    <button onclick="logout()" style="position: absolute; top: 15px; right: 15px;">Se déconnecter</button>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="#">Accueil</a></li>
+      <li class="dropdown">
+        <a href="#">Projets</a>
+        <ul class="submenu">
+          <li><a href="#">Projet 1</a></li>
+          <li><a href="#">Projet 2</a></li>
+          <li><a href="#">Projet 3</a></li>
+        </ul>
+      </li>
+      <li><a href="#">À propos</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2>Bienvenue !</h2>
+    <p>Bienvenue sur mon portfolio personnel. Utilisez le menu pour naviguer entre les différentes sections.</p>
+  </main>
+
+  <script>
+    function logout() {
+      sessionStorage.removeItem("auth");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
