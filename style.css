@@ -1,165 +1,89 @@
-/* Style général */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
+/* ===========================
+   🌌 THEME GLASSMORPHISM SOMBRE
+   =========================== */
 
-header {
-    background-color: #333;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-h1 {
-    margin: 0;
-}
-
-/* Menu principal */
-nav {
-    background-color: #444;
-}
-
-.menu {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
-.menu > li {
-    position: relative;
-}
-
-.menu > li > a {
-    display: block;
-    padding: 15px 20px;
-    color: white;
-    text-decoration: none;
-}
-
-.menu > li:hover {
-    background-color: #555;
-}
-
-/* Sous-menu (menu déroulant) */
-.submenu {
-    display: none;
-    position: absolute;
-    background-color: #666;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    top: 100%;
-    left: 0;
-    min-width: 160px;
-}
-
-.submenu li a {
-    display: block;
-    padding: 10px;
-    color: white;
-    text-decoration: none;
-}
-
-.submenu li a:hover {
-    background-color: #777;
-}
-
-/* Afficher le sous-menu au survol */
-.dropdown:hover .submenu {
-    display: block;
-}
-
-/* Contenu principal */
-main {
-    padding: 20px;
-    text-align: center;
-}
-
-
-/* Style pour la page de login */
-.login-body {
-    background-color: #f0f0f0;
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-}
-
-.login-container {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    width: 300px;
-    text-align: center;
-}
-
-.login-container h2 {
-    margin-bottom: 20px;
-}
-
-.login-container input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.login-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.login-container button:hover {
-    background-color: #555;
-}
-
-#error-message {
-    color: red;
-    margin-top: 10px;
-}
-/* Réinitialisation simple */
-body {
+/* Police & reset */
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
-/* En-tête */
+/* Arrière-plan global */
+body {
+  background: radial-gradient(circle at top left, #0a0a0a, #121212 40%, #1a1a1a);
+  color: #eee;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Effet verre générique */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* ===========================
+   HEADER
+   =========================== */
 header {
-  background-color: #333;
-  color: white;
-  padding: 20px;
+  width: 100%;
   text-align: center;
+  padding: 25px 0;
+  color: #fff;
+  font-size: 1.8em;
+  letter-spacing: 1px;
   position: relative;
+  z-index: 100;
+}
+header.glass {
+  margin-bottom: 10px;
 }
 
-h1 {
-  margin: 0;
+/* Bouton de déconnexion */
+header button {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+header button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
 }
 
-/* Menu de navigation */
+/* ===========================
+   NAVIGATION
+   =========================== */
 nav {
-  background-color: #444;
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+nav.glass {
+  padding: 0 10px;
 }
 
 .menu {
   list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  position: relative;
 }
 
 .menu > li {
@@ -167,94 +91,62 @@ nav {
 }
 
 .menu > li > a {
-  display: block;
-  padding: 15px 20px;
-  color: white;
+  color: #fff;
   text-decoration: none;
+  padding: 14px 18px;
+  display: block;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
-.menu > li:hover {
-  background-color: #555;
+.menu > li > a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
 }
 
-/* Sous-menu (menu déroulant) */
+/* ===========================
+   MENU DÉROULANT
+   =========================== */
 .submenu {
-  display: none;
   position: absolute;
-  background-color: #666;
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   list-style: none;
-  margin: 0;
-  padding: 0;
   top: 100%;
   left: 0;
-  min-width: 160px;
-  z-index: 1000;
-}
-
-.submenu li a {
-  display: block;
-  padding: 10px;
-  color: white;
-  text-decoration: none;
-}
-
-.submenu li a:hover {
-  background-color: #777;
-}
-
-/* Affichage du sous-menu au survol */
-.dropdown:hover .submenu {
-  display: block;
-}
-
-/* Contenu principal */
-main {
-  padding: 40px 20px;
-  text-align: center;
-}
-
-
-/* --- Animation fluide pour le menu déroulant --- */
-.submenu {
-  display: block;
   opacity: 0;
   transform: translateY(-10px);
   visibility: hidden;
-  transition: all 0.25s ease;
-  position: absolute;
-  background-color: #666;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  top: 100%;
-  left: 0;
+  transition: all 0.3s ease;
   min-width: 180px;
   z-index: 1000;
-  border-radius: 4px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Animation au survol */
 .dropdown:hover .submenu {
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
 }
 
-/* Style des liens dans le sous-menu */
 .submenu li a {
   display: block;
-  padding: 10px 15px;
-  color: white;
+  padding: 12px 16px;
+  color: #eee;
   text-decoration: none;
-  transition: background-color 0.2s ease;
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
 
 .submenu li a:hover {
-  background-color: #777;
+  background: rgba(255, 255, 255, 0.15);
 }
 
-/* Alignement du menu déroulant de droite */
+/* Menu à droite */
 .right-dropdown {
   margin-left: auto;
 }
@@ -262,4 +154,96 @@ main {
 .submenu-right {
   right: 0;
   left: auto;
+}
+
+/* ===========================
+   CONTENU PRINCIPAL
+   =========================== */
+main {
+  flex: 1;
+  width: 90%;
+  max-width: 900px;
+  margin-top: 30px;
+  padding: 40px;
+  text-align: center;
+  border-radius: 15px;
+  color: #ddd;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+main.glass {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Titres */
+h1, h2 {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/* ===========================
+   BOUTONS GÉNÉRIQUES
+   =========================== */
+button, a.button {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+button:hover, a.button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+/* ===========================
+   LOGIN PAGE (optionnel)
+   =========================== */
+.login-body {
+  background: linear-gradient(135deg, #0e0e0e, #181818);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  width: 320px;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+}
+.login-container.glass {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+#error-message {
+  color: #ff7070;
+  margin-top: 10px;
+}
+
+/* ===========================
+   PETITS EFFETS
+   =========================== */
+nav, header, main, .login-container {
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.menu > li > a, .submenu li a, button {
+  transition: all 0.25s ease;
 }
