@@ -111,13 +111,18 @@
         </section>
 
         <section class="section-contenu" id="cours">
-            <div class="cours-text-container">
+            
+            <div class="cours-text-container" style="max-width: 900px; margin-right: 0; text-align: center;">
                 <h2>Cours - Prise de Note</h2>
                 <p>Voici les différentes notes de cours que j'ai rédigées durant le semestre.</p>
                 
-                <ul class="liste-tp">
-                    <li>
-                        <strong>Les livrables SI</strong>
+                <div class="cours-grid">
+                    
+                    <div class="cours-card">
+                        <img src="images/icons/notes.png" alt="Notes" class="cours-card-icon">
+                        <div class="file-info">
+                            <strong>Les livrables SI</strong>
+                        </div>
                         <div class="file-actions">
                             <button class="btn-view" data-src="fichiers/cours/les livrables SI.pdf">
                                 <img src="images/icons/icon-view.png" alt="Voir le document">
@@ -126,9 +131,13 @@
                                 <img src="images/icons/icon-download.png" alt="Télécharger le document">
                             </a>
                         </div>
-                    </li>
-                    <li>
-                        <strong>Gestion de Projet</strong>
+                    </div>
+
+                    <div class="cours-card">
+                        <img src="images/icons/notes.png" alt="Gestion" class="cours-card-icon">
+                        <div class="file-info">
+                            <strong>Gestion de Projet</strong>
+                        </div>
                         <div class="file-actions">
                             <button class="btn-view" data-src="fichiers/cours/cours gestion de projet version étudiant.pdf">
                                 <img src="images/icons/icon-view.png" alt="Voir le document">
@@ -137,16 +146,16 @@
                                 <img src="images/icons/icon-download.png" alt="Télécharger le document">
                             </a>
                         </div>
-                    </li>
-                </ul>
-            </div>
+                    </div>
+
+                </div> </div>
             
             <div class="viewer-container" id="viewer-container" style="display: none;">
+                <button class="btn-close-viewer" id="btn-close-viewer" title="Fermer">&times;</button>
                 <iframe id="viewer-frame" src="" width="100%" height="100%" frameborder="0"></iframe>
             </div>
 
-            <img src="images/spring.gif" alt="Livre animé" class="animated-book-gif">
-        </section>
+            </section>
 
         <div class="parallax-divider" style="background-image: url('images/image-parallax-2.jpg');"></div>
 
@@ -195,26 +204,20 @@
             
             <img src="images/mail.gif" alt="Contact" class="animated-mail-img">
 
-            <div class="glass-container">
-                <h2>Contact</h2>
-                <p>Envoyez-moi un message :</p>
+            <div class="glass-container contact-box-simple">
                 
-                <form class="contact-form" 
-                      action="mailto:42014913@parisnanterre.fr" 
-                      method="POST" 
-                      enctype="text/plain">
-                    
-                    <input type="text" name="Nom" placeholder="Votre Nom" required>
-                    
-                    <input type="text" name="Sujet" placeholder="Sujet du message" required>
-                    
-                    <textarea name="Message" placeholder="Votre message..." rows="5" required></textarea>
-                    
-                    <button type="submit" class="contact-email">
-                        Envoyer (Ouvre le client mail)
-                    </button>
-                </form>
-
+                <h3>Coordonnées</h3>
+                
+                <ul class="contact-list-simple">
+                    <li>
+                        <img src="images/icons/enveloppe.png" alt="Email" class="contact-icon">
+                        <a href="mailto:42014913@parisnanterre.fr">42014913@parisnanterre.fr</a>
+                    </li>
+                    <li>
+                        <img src="images/icons/github.png" alt="GitHub" class="contact-icon">
+                        <a href="https://github.com/boughbough" target="_blank" rel="noopener noreferrer">Mon Github</a>
+                    </li>
+                </ul>
             </div>
         </footer>
 
