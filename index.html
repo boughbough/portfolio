@@ -1,63 +1,87 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Mon Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <script>
-    // Protection par sessionStorage.
-    if (sessionStorage.getItem("auth") !== "ok") {
-      window.location.href = "login.html";
-    }
-  </script>
+<body class="login-page">
 
-  <header class="glass">
-    <h1>Mon Portfolio</h1>
-    <button onclick="logout()" style="position: absolute; top: 15px; right: 15px;">Se déconnecter</button>
-  </header>
+    <div class="glass-container login-box page-entry-transition" id="login-box">
+        <h2>Portfolio - Accès</h2>
+        <p>Veuillez entrer le mot de passe pour continuer.</p>
+        
+        <form class="contact-form" id="login-form">
+            <input type="password" id="password-input" placeholder="Mot de passe" required>
+            <button type="submit" class="contact-email">
+                Entrer
+            </button>
+            <p class="error-message" id="error-message">Mot de passe incorrect.</p>
+        </form>
+    </div>
 
-  <nav class="glass">
-    <ul class="menu">
-      <li><a href="index.html">Accueil</a></li>
+    <h1 class="welcome-text" id="welcome-text">Bienvenue</h1>
 
-      <li class="dropdown">
-        <a href="#">Projets</a>
-        <ul class="submenu">
-          <li><a href="#">Projet 1</a></li>
-          <li><a href="#">Projet 2</a></li>
-          <li><a href="#">Projet 3</a></li>
-        </ul>
-      </li>
 
-      <li><a href="#">À propos</a></li>
-      <li><a href="#">Contact</a></li>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('login-form');
+            const passwordInput = document.getElementById('password-input');
+            const errorMessage = document.getElementById('error-message');
+            const loginBox = document.getElementById('login-box');
+            const welcomeText = document.getElementById('welcome-text');
 
-      <!-- 🔽 Nouveau menu Travaux Pratiques -->
-      <li class="dropdown right-dropdown">
-        <a href="#">Travaux Pratiques ▾</a>
-        <ul class="submenu submenu-right">
-          <li><a href="tp1.html">TP de la semaine 1</a></li>
-          <li><a href="tp2.html">TP de la semaine 2</a></li>
-          <li><a href="tp3.html">TP de la semaine 3</a></li>
-          <li><a href="tp4.html">TP de la semaine 4</a></li>
-          <li><a href="tp5.html">TP de la semaine 5</a></li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
+            const MOT_DE_PASSE = "93300"; // Changez "admin"
 
-  <main class="glass">
-    <h2>Bienvenue !</h2>
-    <p>Bienvenue sur mon portfolio personnel. Utilisez le menu pour naviguer entre les différentes sections.</p>
-  </main>
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault(); 
+                const passwordTry = passwordInput.value;
 
-  <script>
-    function logout() {
-      sessionStorage.removeItem("auth");
-      window.location.href = "login.html";
-    }
-  </script>
+                if (passwordTry === MOT_DE_PASSE) {
+                    // Mot de passe correct
+                    errorMessage.style.display = 'none';
+                    
+                    // 1. On retire l'animation d'entrée (corrige le bug)
+                    loginBox.classList.remove('page-entry-transition');
+                    
+                    // 2. On attend 0ms avant de lancer la sortie
+                    setTimeout(() => {
+                        loginBox.classList.add('exiting');
+                    }, 0); 
+                    
+                    // 3. On attend la fin de la sortie (600ms)
+                    setTimeout(() => {
+                        welcomeText.classList.add('animate');
+                        
+                        // 4. On attend la fin du "Bienvenue" (1500ms)
+                        setTimeout(() => {
+                            
+                            // ### SÉCURITÉ AJOUTÉE ###
+                            // On "signe" la session pour la prochaine page
+                            sessionStorage.setItem('isLoggedIn', 'true');
+                            // On dit à la prochaine page de jouer l'animation
+                            sessionStorage.setItem('playEntryAnimation', 'true');
+                            
+                            window.location.href = 'portfolio.html';
+                            
+                        }, 1500); // Durée de "welcome-yoyo"
+                        
+                    }, 600); // Durée de "exiting"
+                
+                } else {
+                    // Mot de passe incorrect
+                    errorMessage.style.display = 'block'; 
+                    // On retire l'animation d'entrée (corrige le bug du "shake")
+                    loginBox.classList.remove('page-entry-transition');
+                    loginBox.classList.add('shake'); 
+                    
+                    setTimeout(() => {
+                        loginBox.classList.remove('shake');
+                    }, 500);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

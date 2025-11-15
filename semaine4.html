@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semaine 4: Gantt - MCD</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar" id="main-navbar">
+        <a href="portfolio.html#accueil">Accueil</a>
+        <a href="portfolio.html#apropos">À propos</a>
+        <a href="portfolio.html#td">TD</a>
+        <a href="portfolio.html#cours">Cours</a>
+        <a href="portfolio.html#certification">Certification</a>
+        <a href="portfolio.html#projet-final">Projet Final</a>
+        <a href="portfolio.html#contact">Contact</a>
+    </nav>
+
+    <main class="page-entry-transition">
+        <section class="section-contenu">
+            
+            <a href="portfolio.html#td" class="back-link">&larr; Revenir aux TD</a>
+            
+            <h2>Semaine 4: Gantt - MCD</h2>
+            <p>Cliquez sur "Voir" pour afficher le document directement sur cette page.</p>
+            
+            <ul class="liste-tp" style="max-width: 800px;">
+                <li class="dossier">
+                    <div class="dossier-header">
+                        <strong>Gantt</strong>
+                        <button class="btn-toggle-dossier">
+                            <span class="arrow">►</span>
+                        </button>
+                    </div>
+                    
+                    <ul class="sous-liste-fichiers">
+                        <li>
+                            <div class="file-info">
+                                <strong>Diagramme de Gantt</strong>
+                                <span class="file-description">Online Gantt 20251013.png</span>
+                            </div>
+                            <div class="file-actions">
+                                <button class="btn-view" data-src="fichiers/s4/gantt/Online Gantt 20251013.png">
+                                    <img src="images/icons/icon-view.png" alt="Voir le document">
+                                </button>
+                                <a href="fichiers/s4/gantt/Online Gantt 20251013.png" download class="btn-download">
+                                    <img src="images/icons/icon-download.png" alt="Télécharger le document">
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="file-info">
+                                <strong>TP Gantt</strong>
+                                <span class="file-description">tp gantt.pdf</span>
+                            </div>
+                            <div class="file-actions">
+                                <button class="btn-view" data-src="fichiers/s4/gantt/tp gantt.pdf">
+                                    <img src="images/icons/icon-view.png" alt="Voir le document">
+                                </button>
+                                <a href="fichiers/s4/gantt/tp gantt.pdf" download class="btn-download">
+                                    <img src="images/icons/icon-download.png" alt="Télécharger le document">
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="dossier">
+                    <div class="dossier-header">
+                        <strong>MCD</strong>
+                        <button class="btn-toggle-dossier">
+                            <span class="arrow">►</span>
+                        </button>
+                    </div>
+                    
+                    <ul class="sous-liste-fichiers">
+                        <li>
+                            <div class="file-info">
+                                <strong>EXO 1</strong>
+                                <span class="file-description">MCD EX1.png</span>
+                            </div>
+                            <div class="file-actions">
+                                <button class="btn-view" data-src="fichiers/s4/mcd/MCD EX1.png">
+                                    <img src="images/icons/icon-view.png" alt="Voir le document">
+                                </button>
+                                <a href="fichiers/s4/mcd/MCD EX1.png" download class="btn-download">
+                                    <img src="images/icons/icon-download.png" alt="Télécharger le document">
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="file-info">
+                                <strong>EXO 2</strong>
+                                <span class="file-description">MCD exo2.jpg</span>
+                            </div>
+                            <div class="file-actions">
+                                <button class="btn-view" data-src="fichiers/s4/mcd/MCD exo2.jpg">
+                                    <img src="images/icons/icon-view.png" alt="Voir le document">
+                                </button>
+                                <a href="fichiers/s4/mcd/MCD exo2.jpg" download class="btn-download">
+                                    <img src="images/icons/icon-download.png" alt="Télécharger le document">
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="viewer-container" id="viewer-container" style="display: none;">
+                <button class="btn-close-viewer" id="btn-close-viewer" title="Fermer">&times;</button>
+                <iframe id="viewer-frame" src="" width="100%" height="100%" frameborder="0"></iframe>
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            /* --- CODE (Visionneuse) --- */
+            const viewButtons = document.querySelectorAll('.btn-view');
+            const viewerContainer = document.getElementById('viewer-container');
+            const viewerFrame = document.getElementById('viewer-frame');
+            const closeButton = document.getElementById('btn-close-viewer');
+
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const fileUrl = this.getAttribute('data-src');
+                    viewerFrame.setAttribute('src', fileUrl);
+                    viewerContainer.style.display = 'block';
+                    viewerContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+            });
+
+            if (closeButton && viewerContainer) {
+                closeButton.addEventListener('click', () => {
+                    viewerContainer.style.display = 'none';
+                    viewerFrame.setAttribute('src', ''); 
+                });
+            }
+
+            /* --- CODE (Accordion Dossier) --- */
+            const folderHeaders = document.querySelectorAll('.dossier-header');
+            folderHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const toggleButton = this.querySelector('.btn-toggle-dossier');
+                    const parentDossier = this.closest('.dossier');
+                    const subList = parentDossier.querySelector('.sous-liste-fichiers');
+
+                    if (toggleButton) {
+                        toggleButton.classList.toggle('active');
+                    }
+                    if (subList) {
+                        subList.classList.toggle('visible');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

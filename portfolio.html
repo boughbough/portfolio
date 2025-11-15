@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio - Systèmes d'Information</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar page-entry-transition" id="main-navbar">
+        <a href="#accueil">Accueil</a>
+        <a href="#apropos">À propos</a>
+        <a href="#td">TD</a>
+        <a href="#cours">Cours</a>
+        <a href="#certification">Certification</a>
+        <a href="#projet-final">Projet Final</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <main class="page-entry-transition">
+
+        <section class="hero-spline" id="accueil">
+            <spline-viewer 
+                class="spline-fade-in" url="https://prod.spline.design/IunqS1JXmoWgAbbc/scene.splinecode">
+            </spline-viewer>
+            <div class="aesthetic-intro">
+                <h1>-Portfolio-<br> Mohamed<br>Boughmadi</h1>
+                <p class="subtitle">Introduction aux Systèmes d'Information</p>
+            </div>
+            <div class="scroll-indicator">
+                <span class="scroll-text">Scrollez</span>
+                <span class="scroll-line"></span>
+                <span class="scroll-icon"></span>
+                <span class="scroll-line"></span>
+                <span class="scroll-text">pour découvrir</span>
+            </div>
+        </section>
+
+        <section class="section-contenu" id="apropos">
+            <img src="images/profile.png" alt="Ordinateur" class="animated-computer-gif">
+            <div class="apropos-text-container">
+                <h2>À propos de moi</h2>
+                <p>
+                    Étudiant passionné par les <strong>Systèmes d'Information</strong>, je m'intéresse particulièrement à l'architecture réseau, à la gestion de bases de données et au développement web.
+                </p>
+                <p>
+                    Ce portfolio retrace mon parcours académique, mes projets techniques et les compétences que j'ai acquises tout au long de ma formation.
+                </p>
+            </div>
+        </section>
+
+        <section class="section-contenu" id="td">
+            <h2>Travaux Dirigés (TD)</h2>
+            <p>Voici les différents travaux pratiques que j'ai réalisés dans le cadre de ce cours.</p>
+            <div class="carousel">
+                <div class="group">
+                    <a href="semaine1.html" class="card">
+                        <img src="images/icons/developpement-de-logiciels.png" alt="" class="card-icon">
+                        <strong>TP 1 : PGI</strong>
+                        <p>Analyse et conception d'un PGI.</p>
+                    </a>
+                    <a href="semaine2.html" class="card">
+                        <img src="images/icons/chart-pie-alt.png" alt="" class="card-icon">
+                        <strong>TP 2 : Diagrammes - Odoo</strong>
+                        <p>Création de diagrammes (Cas d'utilisation, Séquence) et exploration des modules Odoo.</p>
+                    </a>
+                    <a href="semaine3.html" class="card">
+                        <img src="images/icons/parametre-de-flux-de-travail-alt.png" alt="" class="card-icon">
+                        <strong>TP 3 : Gestion de projet</strong>
+                        <p>Planification et suivi d'un projet SI fictif.</p>
+                    </a>
+                    <a href="semaine4.html" class="card">
+                        <img src="images/icons/diagramme-de-gantt.png" alt="" class="card-icon">
+                        <strong>TP 4 : Gantt - MCD</strong>
+                        <p>Élaboration d'un planning projet (Diagramme de Gantt) et conception de base de données (MCD).</p>
+                    </a>
+                    <a href="semaine5.html" class="card">
+                        <img src="images/icons/carte-reseau.png" alt="" class="card-icon">
+                        <strong>TP 5 : Class Diagram - Use Case</strong>
+                        <p>Modélisation UML : conception des diagrammes de classes et de cas d'utilisation.</p>
+                    </a>
+                </div>
+                <div aria-hidden="true" class="group">
+                    <a href="semaine1.html" class="card">
+                        <img src="images/icons/developpement-de-logiciels.png" alt="" class="card-icon">
+                        <strong>TP 1 : PGI</strong>
+                        <p>Analyse et conception d'un PGI.</p>
+                    </a>
+                    <a href="semaine2.html" class="card">
+                        <img src="images/icons/chart-pie-alt.png" alt="" class="card-icon">
+                        <strong>TP 2 : Diagrammes - Odoo</strong>
+                        <p>Création de diagrammes (Cas d'utilisation, Séquence) et exploration des modules Odoo.</p>
+                    </a>
+                    <a href="semaine3.html" class="card">
+                        <img src="images/icons/parametre-de-flux-de-travail-alt.png" alt="" class="card-icon">
+                        <strong>TP 3 : Gestion de projet</strong>
+                        <p>Planification et suivi d'un projet SI fictif.</p>
+                    </a>
+                    <a href="semaine4.html" class="card">
+                        <img src="images/icons/diagramme-de-gantt.png" alt="" class="card-icon">
+                        <strong>TP 4 : Gantt - MCD</strong>
+                        <p>Élaboration d'un planning projet (Diagramme de Gantt) et conception de base de données (MCD).</p>
+                    </a>
+                    <a href="semaine5.html" class="card">
+                        <img src="images/icons/carte-reseau.png" alt="" class="card-icon">
+                        <strong>TP 5 : Class Diagram - Use Case</strong>
+                        <p>Modélisation UML : conception des diagrammes de classes et de cas d'utilisation.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-contenu" id="cours">
+            <div class="cours-text-container">
+                <h2>Cours - Prise de Note</h2>
+                <p>Voici les différentes notes de cours que j'ai rédigées durant le semestre.</p>
+                
+                <ul class="liste-tp">
+                    <li>
+                        <strong>Les livrables SI</strong>
+                        <div class="file-actions">
+                            <button class="btn-view" data-src="fichiers/cours/les livrables SI.pdf">
+                                <img src="images/icons/icon-view.png" alt="Voir le document">
+                            </button>
+                            <a href="fichiers/cours/les livrables SI.pdf" download class="btn-download">
+                                <img src="images/icons/icon-download.png" alt="Télécharger le document">
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Gestion de Projet</strong>
+                        <div class="file-actions">
+                            <button class="btn-view" data-src="fichiers/cours/cours gestion de projet version étudiant.pdf">
+                                <img src="images/icons/icon-view.png" alt="Voir le document">
+                            </button>
+                            <a href="fichiers/cours/cours gestion de projet version étudiant.pdf" download class="btn-download">
+                                <img src="images/icons/icon-download.png" alt="Télécharger le document">
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="viewer-container" id="viewer-container" style="display: none;">
+                <iframe id="viewer-frame" src="" width="100%" height="100%" frameborder="0"></iframe>
+            </div>
+
+            <img src="images/spring.gif" alt="Livre animé" class="animated-book-gif">
+        </section>
+
+        <div class="parallax-divider" style="background-image: url('images/image-parallax-2.jpg');"></div>
+
+        <section class="section-contenu" id="certification">
+            <div class="cert-text-container">
+                <h2>Certification</h2>
+                <p>Ici, tu peux parler des certifications que tu as passées (ex: ITIL, Cisco, etc.).</p>
+
+                <ul class="liste-tp">
+                    <li>
+                        <strong>Cisco CCNA</strong>
+                         <div class="file-actions">
+                            <button class="btn-view" data-src="fichiers/certs/cisco_ccna.pdf">
+                                <img src="images/icons/icon-view.png" alt="Voir le document">
+                            </button>
+                            <a href="fichiers/certs/cisco_ccna.pdf" download class="btn-download">
+                                <img src="images/icons/icon-download.png" alt="Télécharger le document">
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Google IT Support</strong>
+                        <div class="file-actions">
+                            <button class="btn-view" data-src="fichiers/certs/google_it_support.pdf">
+                                <img src="images/icons/icon-view.png" alt="Voir le document">
+                            </button>
+                            <a href="fichiers/certs/google_it_support.pdf" download class="btn-download">
+                                <img src="images/icons/icon-download.png" alt="Télécharger le document">
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <img src="images/degree.png" alt="Certificat" class="animated-cert-img">
+        </section>
+
+        <div class="parallax-divider" style="background-image: url('images/image-parallax-3.jpg');"></div>
+
+        <section class="section-contenu" id="projet-final">
+            <h2>Projet Final</h2>
+            <p>Description de mon projet de fin de semestre...</p>
+        </section>
+
+        <footer class="parallax-section" id="contact" style="background-image: url('images/image-parallax-4.jpg');">
+            
+            <img src="images/mail.gif" alt="Contact" class="animated-mail-img">
+
+            <div class="glass-container">
+                <h2>Contact</h2>
+                <p>Envoyez-moi un message :</p>
+                
+                <form class="contact-form" 
+                      action="mailto:42014913@parisnanterre.fr" 
+                      method="POST" 
+                      enctype="text/plain">
+                    
+                    <input type="text" name="Nom" placeholder="Votre Nom" required>
+                    
+                    <input type="text" name="Sujet" placeholder="Sujet du message" required>
+                    
+                    <textarea name="Message" placeholder="Votre message..." rows="5" required></textarea>
+                    
+                    <button type="submit" class="contact-email">
+                        Envoyer (Ouvre le client mail)
+                    </button>
+                </form>
+
+            </div>
+        </footer>
+
+    </main> <div class="copyright">
+        &copy; 2025 Mohamed Boughmadi. Tous droits réservés.
+    </div>
+
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.59/build/spline-viewer.js"></script>
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.11.4/build/spline-viewer.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            window.scrollTo(0, 0);
+            
+            /* --- SCROLLSPY --- */
+            const sections = document.querySelectorAll("section[id], footer[id]");
+            const navLinks = document.querySelectorAll(".navbar a");
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-link');
+                        });
+                        const activeLink = document.querySelector(`.navbar a[href="#${id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active-link');
+                        }
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            
+            /* --- VISIONNEUSE DE FICHIERS (Votre code original) --- */
+            const viewButtons = document.querySelectorAll('.btn-view');
+            const viewerContainer = document.getElementById('viewer-container');
+            const viewerFrame = document.getElementById('viewer-frame');
+
+            if (viewerContainer && viewerFrame) {
+                viewButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const fileUrl = this.getAttribute('data-src');
+                        
+                        viewerFrame.setAttribute('src', fileUrl);
+                        viewerContainer.style.display = 'block';
+                        
+                        viewerContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    });
+                });
+            }
+
+            /* --- ACCORDION DOSSIER (S'applique s'il y a des dossiers sur la page) --- */
+            const folderHeaders = document.querySelectorAll('.dossier-header');
+            folderHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const toggleButton = this.querySelector('.btn-toggle-dossier');
+                    const parentDossier = this.closest('.dmossier');
+                    const subList = parentDossier.querySelector('.sous-liste-fichiers');
+
+                    if (toggleButton) {
+                        toggleButton.classList.toggle('active');
+                    }
+                    if (subList) {
+                        subList.classList.toggle('visible');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
+

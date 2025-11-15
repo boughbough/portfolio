@@ -1,249 +1,1150 @@
-/* ===========================
-   🌌 THEME GLASSMORPHISM SOMBRE
-   =========================== */
+/* Importation de la police "Source Code Pro" */
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;900&display=swap');
 
-/* Police & reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Roboto, sans-serif;
-}
-
-/* Arrière-plan global */
-body {
-  background: radial-gradient(circle at top left, #0a0a0a, #121212 40%, #1a1a1a);
-  color: #eee;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* ==========================================================================
+   1. PALETTE DE COULEURS & VARIABLES (Thème Nuit & Violet)
+   ========================================================================== */
+:root {
+    --fond-profond: #050618;
+    --fond-section: #050618;
+    
+    /* --- NOUVELLE COULEUR D'ACCENT --- */
+    --accent-lumiere: #6563ff;    /* Violet tech */
+    
+    --texte-clair: #EAEBF3;
+    
+    /* --- Effets de verre mis à jour --- */
+    --transparence-verre: rgba(5, 6, 24, 0.75);  
+    --bordure-verre: rgba(101, 99, 255, 0.2); /* Bordure violette */
 }
 
-/* Effet verre générique */
-.glass {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+/* ==========================================================================
+   2. STYLES GLOBAUX & ANIMATIONS
+   ========================================================================== */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Code Pro', monospace;
+    line-height: 1.6;
+    scroll-behavior: smooth; 
+    background-color: var(--fond-profond);
+    color: var(--texte-clair);
+    overflow-x: hidden; 
 }
 
-/* ===========================
-   HEADER
-   =========================== */
-header {
-  width: 100%;
-  text-align: center;
-  padding: 25px 0;
-  color: #fff;
-  font-size: 1.8em;
-  letter-spacing: 1px;
-  position: relative;
-  z-index: 100;
+/* ... (Toutes vos animations @keyframes ... ) ... */
+/* NOUVEAU CODE (Effet "Yoyo") */
+@keyframes pageEntry {
+    from { opacity: 0; transform: translateY(150px); } /* Monte de 150px */
+    to { opacity: 1; transform: translateY(0); }
 }
-header.glass {
-  margin-bottom: 10px;
+.page-entry-transition {
+    animation: pageEntry 1s ease-out forwards;
 }
-
-/* Bouton de déconnexion */
-header button {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  padding: 8px 15px;
-  border: none;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
+@keyframes floatAnimation {
+    0% { transform: translateY(-50%) translateX(0); }
+    50% { transform: translateY(-53%) translateX(5px); }
+    100% { transform: translateY(-50%) translateX(0); }
 }
-header button:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: scale(1.05);
+@keyframes textFloatAnimation {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); } 
+    100% { transform: translateY(0); }
+}
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translate(-50px, -50%); }
+    to { opacity: 1; transform: translate(0, -50%); }
+}
+@keyframes scrollBall {
+    0% { top: 5px; opacity: 1; }
+    50% { top: 12px; opacity: 0; }
+    100% { top: 5px; opacity: 1; }
+}
+@keyframes spin {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
 }
 
-/* ===========================
-   NAVIGATION
-   =========================== */
-nav {
-  width: 90%;
-  margin: 0 auto;
-  border-radius: 12px;
-}
-nav.glass {
-  padding: 0 10px;
+
+/* ### AJOUTEZ CECI ### */
+/* Animation simple de fondu pour le Spline */
+@keyframes simpleFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-.menu {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  position: relative;
+.spline-fade-in {
+    /* L'animation dure un peu plus longtemps pour masquer le temps de chargement */
+    animation: simpleFadeIn 1.5s ease-out forwards;
+}
+/* ==========================================================================
+   3. BARRE DE NAVIGATION (NAVBAR)
+   ========================================================================== */
+.navbar {
+    position: fixed; 
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+    z-index: 1000;
+    background: var(--transparence-verre);
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--bordure-verre);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.6); 
+    top: 0; 
+}
+.navbar a {
+    color: var(--texte-clair);
+    text-decoration: none;
+    padding: 15px 20px;
+    font-weight: 600;
+    transition: all 0.3s ease; 
+}
+.navbar a:hover {
+    background-color: rgba(101, 99, 255, 0.1);
+    color: var(--accent-lumiere);
+    transform: translateY(-2px); 
+}
+.navbar a.active-link {
+    color: var(--accent-lumiere);
+    text-shadow: 0 0 15px rgba(101, 99, 255, 0.6);
+    transform: scale(1.1); 
 }
 
-.menu > li {
-  position: relative;
+/* ==========================================================================
+   4. HERO SECTION (SPLINE)
+   ========================================================================== */
+.hero-spline {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--fond-profond);
+}
+.hero-spline spline-viewer {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.hero-spline::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to top, var(--fond-profond) 0%, rgba(5, 6, 24, 0) 100%);
+    z-index: 9;
+    pointer-events: none;
+}
+.aesthetic-intro {
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: translateY(-50%);
+    text-align: left;
+    z-index: 10;
+    pointer-events: none; 
+    opacity: 0; 
+    animation: slideInLeft 1.5s ease-out forwards;
+    animation-delay: 1s;
+}
+.aesthetic-intro a {
+    pointer-events: auto; 
+}
+.aesthetic-intro h1 {
+    color: var(--texte-clair);
+    font-size: 5vw;
+    font-weight: 900;
+    line-height: 0.9;
+    margin: 0;
+    text-transform: uppercase;
+    text-shadow: 4px 4px 0px rgba(5, 6, 24, 1); 
+}
+.aesthetic-intro .subtitle {
+    color: var(--accent-lumiere);
+    font-size: 1.2rem;
+    margin-top: 15px;
+    letter-spacing: 2px;
+    font-weight: 400;
+    text-shadow: 0 0 10px rgba(101, 99, 255, 0.4);
+}
+.continue-button {
+    font-size: 1.3em;
+    background: var(--accent-lumiere);
+    color: var(--fond-profond);
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block; 
+    box-shadow: 0 0 10px rgba(101, 99, 255, 0.6);
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+.continue-button:hover {
+    background: var(--texte-clair);
+    color: var(--fond-profond);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(240, 235, 220, 0.8);
+}
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.scroll-text {
+    font-size: 0.9em;
+    color: var(--texte-clair);
+    opacity: 0.7;
+    letter-spacing: 1px;
+}
+.scroll-line {
+    width: 80px;
+    height: 1px;
+    background: var(--accent-lumiere);
+    opacity: 0.3;
+}
+.scroll-icon {
+    width: 16px; 
+    height: 24px;
+    border: 2px solid var(--accent-lumiere);
+    border-radius: 12px;
+    position: relative;
+    animation: textFloatAnimation 2s ease-in-out infinite;
+}
+.scroll-icon::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--accent-lumiere);
+    border-radius: 50%;
+    animation: scrollBall 2s ease-in-out infinite;
 }
 
-.menu > li > a {
-  color: #fff;
-  text-decoration: none;
-  padding: 14px 18px;
-  display: block;
-  font-weight: 500;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+/* ==========================================================================
+   5. SECTIONS DE CONTENU (Général)
+   ========================================================================== */
+.section-contenu {
+    padding: 80px 40px; 
+    background-color: var(--fond-section);
+    color: var(--texte-clair);
+    text-align: center;
+    position: relative; 
+    z-index: 2; 
+    overflow: hidden;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: none; 
+    border-bottom: none;
+}
+.section-contenu h2 {
+    font-size: 2.8em; 
+    margin-bottom: 25px;
+    color: var(--accent-lumiere);
+    text-shadow: 0 0 15px rgba(101, 99, 255, 0.4);
+    position: relative;
+    z-index: 2;
+    animation: textFloatAnimation 3s ease-in-out infinite;
+    animation-delay: 0.2s;
+}
+.section-contenu p {
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    font-size: 1.1em;
+    position: relative;
+    z-index: 2;
+    color: #B0B3C6;
 }
 
-.menu > li > a:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-2px);
+/* ==========================================================================
+   6. SECTIONS SPÉCIFIQUES (À Propos, Intro, Cours, Certif...)
+   ========================================================================== */
+
+/* --- Section Intro (Ordi) --- */
+#intro { flex-direction: row; }
+.accueil-titre {
+    font-size: 4em; 
+    margin: 0 0 15px 0;
+    color: var(--accent-lumiere);
+    text-shadow: 0 0 20px rgba(101, 99, 255, 0.6);
+    animation: textFloatAnimation 3s ease-in-out infinite;
+    animation-delay: 0.5s; 
+}
+.accueil-text-container {
+    position: relative;
+    z-index: 2;
+    max-width: 50%;
+    margin-left: 45%;
+    text-align: left;
+}
+.animated-computer-gif {
+    position: absolute;
+    left: 15%; /* Recentré */
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 450px;
+    height: auto;
+    z-index: 1; 
+    animation: floatAnimation 3s ease-in-out infinite; 
+    filter: drop-shadow(0 0 20px rgba(101, 99, 255, 0.2));
 }
 
-/* ===========================
-   MENU DÉROULANT
-   =========================== */
-.submenu {
-  position: absolute;
-  background: rgba(20, 20, 20, 0.7);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  list-style: none;
-  top: 100%;
-  left: 0;
-  opacity: 0;
-  transform: translateY(-10px);
-  visibility: hidden;
-  transition: all 0.3s ease;
-  min-width: 180px;
-  z-index: 1000;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+/* --- Section À Propos --- */
+.apropos-text-container {
+    position: relative;
+    z-index: 2;
+    max-width: 55%;   
+    margin-left: 40%; 
+    text-align: left; 
 }
 
-.dropdown:hover .submenu {
-  opacity: 1;
-  transform: translateY(0);
-  visibility: visible;
+/* --- Section Cours (Livre) --- */
+.cours-text-container {
+    position: relative;
+    z-index: 2; 
+    max-width: 60%;
+    margin-right: 35%; 
+    text-align: left;
+    width: 100%;
+}
+.animated-book-gif {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 300px; 
+    height: auto;
+    z-index: 1;
+    animation: floatAnimation 3s ease-in-out infinite; 
+    filter: drop-shadow(0 0 20px rgba(101, 99, 255, 0.2));
 }
 
-.submenu li a {
-  display: block;
-  padding: 12px 16px;
-  color: #eee;
-  text-decoration: none;
-  border-radius: 6px;
-  transition: all 0.2s ease;
+/* --- Section Certification --- */
+.cert-text-container {
+    position: relative;
+    z-index: 2; 
+    max-width: 60%;
+    margin-right: 35%; 
+    text-align: left;
+    width: 100%;
+}
+.animated-cert-img {
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 350px; 
+    height: auto;
+    z-index: 1;
+    animation: floatAnimation 3s ease-in-out infinite; 
+    animation-delay: 1s;
+    filter: drop-shadow(0 0 20px rgba(101, 99, 255, 0.2));
 }
 
-.submenu li a:hover {
-  background: rgba(255, 255, 255, 0.15);
+/* ==========================================================================
+   7. LISTES & LIENS
+   ========================================================================== */
+
+/* --- Liste de TP Générique (pour Cours, Certif) --- */
+.liste-tp {
+    list-style: none;
+    padding: 0;
+    max-width: 700px; 
+    margin: 30px auto; 
+    text-align: left;
+    position: relative;
+    z-index: 2;
+}
+.liste-tp li {
+    background: rgba(5, 6, 24, 0.6);
+    border: 1px solid rgba(101, 99, 255, 0.15);
+    margin-bottom: 15px;
+    padding: 18px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4); 
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.liste-tp li:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6), 0 0 15px rgba(101, 99, 255, 0.2);
+    border-color: var(--accent-lumiere);
+    cursor: pointer; /* Indique que la ligne est cliquable */
+}
+.liste-tp strong { color: var(--texte-clair); font-size: 1.1em; }
+
+/* --- Carrousel (Section TD) --- */
+.carousel {
+    margin: 50px auto;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex; 
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+.group {
+    display: flex;
+    gap: 25px;
+    animation: spin 8s infinite linear;
+    padding: 20px 10px;
+    padding-right: 25px;
+}
+.carousel:hover .group {
+    animation-play-state: paused;
+}
+.card {
+    flex: 0 0 320px;
+    height: 250px;
+    padding: 30px;
+    box-sizing: border-box;
+    background: var(--fond-section); 
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px; 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5); 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    text-decoration: none; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-10px); 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    border-color: var(--bordure-verre);
+}
+.card-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px rgba(101, 99, 255, 0.3));
+}
+.card strong {
+    font-size: 1.3em;
+    color: var(--texte-clair); 
+    margin-bottom: 10px;
+    text-shadow: none; 
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.2;
+}
+.card p {
+    font-size: 1em;
+    color: #B0B3C6;
+    margin: 0;
+    line-height: 1.5; 
+    white-space: normal;
+    word-break: break-word;
 }
 
-/* Menu à droite */
-.right-dropdown {
-  margin-left: auto;
+/* --- Boutons Fichiers (Page Semaine) --- */
+.file-actions {
+    display: flex;
+    gap: 15px; /* Espace entre les deux boutons */
+}
+/* Style du bouton "Visionner" (Violet) */
+.btn-view {
+    background-color: var(--accent-lumiere);
+    color: var(--fond-profond);
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    border: none;
+    cursor: pointer;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.9em;
+}
+.btn-view:hover {
+    background-color: var(--texte-clair);
+    color: var(--fond-profond);
+    transform: scale(1.05);
+}
+/* Style du bouton "Télécharger" (Contour Violet) */
+.btn-download {
+    background-color: transparent;
+    color: var(--accent-lumiere);
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 1px solid var(--accent-lumiere);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-size: 0.9em;
+}
+.btn-download:hover {
+    background-color: var(--accent-lumiere);
+    color: var(--fond-profond);
+    transform: scale(1.05);
 }
 
-.submenu-right {
-  right: 0;
-  left: auto;
+/* --- Lien "Retour" --- */
+.back-link {
+    display: inline-block;
+    color: var(--accent-lumiere);
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 30px;
+    transition: transform 0.2s ease;
+}
+.back-link:hover {
+    transform: translateX(-5px);
+    text-shadow: 0 0 10px var(--accent-lumiere);
 }
 
-/* ===========================
-   CONTENU PRINCIPAL
-   =========================== */
-main {
-  flex: 1;
-  width: 90%;
-  max-width: 900px;
-  margin-top: 30px;
-  padding: 40px;
-  text-align: center;
-  border-radius: 15px;
-  color: #ddd;
-  font-size: 1.1em;
-  line-height: 1.6;
-}
-main.glass {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-/* Titres */
-h1, h2 {
-  color: #fff;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+/* --- Visionneuse PDF/Sheets (REMIS À NEUF) --- */
+.viewer-container {
+    width: 90%;
+    max-width: 800px; /* Garde la largeur max */
+    margin: 40px auto 0 auto;
+    
+    /* Effet "Glassmorphism" */
+    background: var(--transparence-verre); /* Fond verre dépoli */
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* Effet "Bezel" (cadre interne) */
+    padding: 15px; /* Ajoute un espace entre le cadre et l'écran */
+    box-sizing: border-box; /* Pour que le padding n'augmente pas la taille */
+    
+    /* Effet "Glow" et bordure */
+    border: 1px solid var(--bordure-verre); 
+    border-radius: 12px; /* Coins plus arrondis pour le cadre */
+    box-shadow: 0 0 25px rgba(101, 99, 255, 0.2), 0 5px 20px rgba(0,0,0,0.5); /* Glow + Ombre */
 }
 
-/* ===========================
-   BOUTONS GÉNÉRIQUES
-   =========================== */
-button, a.button {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: white;
-  border-radius: 8px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
+.viewer-container iframe {
+    width: 100%;
+    height: 600px; /* Hauteur de l'écran */
+    border: none;
+    border-radius: 6px; /* Coins arrondis pour "l'écran" (iframe) */
+    display: block; /* Évite les petits espaces fantômes */
+}
+.excel-title {
+    font-size: 1.5em;
+    color: var(--accent-lumiere);
+    text-shadow: 0 0 10px var(--accent-lumiere);
+    margin-top: 40px;
 }
 
-button:hover, a.button:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: scale(1.05);
+/* ==========================================================================
+   8. PARALLAX DIVIDERS
+   ========================================================================== */
+.parallax-section, .parallax-divider {
+    min-height: 500px; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-attachment: fixed; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px; 
+    box-sizing: border-box; 
+    position: relative;
+}
+.welcome-section::before,
+.parallax-section::before,
+.parallax-divider::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--fond-profond);
+    opacity: 0.7; /* Teinte sombre pour fondre les images */
+    z-index: 1; 
+}
+.parallax-divider { min-height: 300px; }
+
+/* ==========================================================================
+   9. SECTION CONTACT
+   ========================================================================== */
+.parallax-section#contact { min-height: 450px; }
+
+/* Image Mail */
+.animated-mail-img {
+    position: absolute;
+    left: 10%;
+    top: 40%;
+    max-width: 200px; 
+    height: auto;
+    z-index: 3;
+    animation: floatAnimation 4s ease-in-out infinite; 
+    filter: drop-shadow(0 0 15px rgba(101, 99, 255, 0.4));
+    pointer-events: none;
 }
 
-/* ===========================
-   LOGIN PAGE (optionnel)
-   =========================== */
-.login-body {
-  background: linear-gradient(135deg, #0e0e0e, #181818);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+/* Container Verre */
+.glass-container {
+    background: var(--transparence-verre);
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--bordure-verre);
+    border-radius: 15px; 
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5); 
+    padding: 40px 60px; 
+    text-align: center;
+    color: var(--texte-clair);
+    text-shadow: 0 0 15px rgba(101, 99, 255, 0.3);
+    max-width: 900px; 
+    transform: perspective(1000px) rotateX(0deg); 
+    transition: all 0.5s ease;
+    position: relative; 
+    z-index: 2;
+}
+.glass-container h2 {
+    font-size: 4em; 
+    margin: 0 0 15px 0;
+    color: var(--accent-lumiere);
+    text-shadow: 0 0 20px rgba(101, 99, 255, 0.6);
+    animation: textFloatAnimation 3s ease-in-out infinite;
+    animation-delay: 0.4s;
+}
+.glass-container p { font-size: 1.3em; max-width: 700px; margin: 0 auto 25px auto; }
+
+.contact-email {
+    font-size: 1.3em; 
+    background: var(--accent-lumiere);
+    color: var(--fond-profond);
+    padding: 12px 25px; 
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    margin-top: 25px; 
+    display: inline-block; 
+    box-shadow: 0 0 15px rgba(101, 99, 255, 0.4);
+}
+.contact-email:hover {
+    background: var(--texte-clair);
+    color: var(--fond-profond);
+    transform: scale(1.05); 
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
 }
 
-.login-container {
-  width: 320px;
-  padding: 30px;
-  border-radius: 15px;
-  text-align: center;
-}
-.login-container.glass {
-  background: rgba(255, 255, 255, 0.08);
+/* ==========================================================================
+   10. RESPONSIVE DESIGN (Mobile)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .aesthetic-intro { left: 5%; width: 90%; }
+    .aesthetic-intro h1 { font-size: 3.5rem; }
+    
+    /* Cache les images décoratives sur mobile */
+    .animated-book-gif, 
+    .animated-computer-gif, 
+    .animated-cert-img, 
+    .animated-mail-img { 
+        display: none; 
+    }
+    
+    /* Centre les conteneurs de texte */
+    .cours-text-container, 
+    .accueil-text-container, 
+    .apropos-text-container, 
+    .cert-text-container { 
+        margin: 0 auto; 
+        max-width: 90%; 
+        text-align: center; 
+    }
+    
+    #intro { flex-direction: column; }
+    
+    .navbar a { padding: 10px 12px; font-size: 0.9em; }
+    .accueil-titre { font-size: 2.5em; }
+
+    /* Ajuste la liste de fichiers sur mobile */
+    .liste-tp li {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+    .file-actions {
+        margin-top: 15px;
+        width: 100%;
+        justify-content: flex-end; /* Met les icônes à droite */
+    }
 }
 
-.login-container input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
+/* ==========================================================================
+   11. STYLES DOSSIER (Accordion)
+   ========================================================================== */
+
+/* Modifie le <li> principal pour qu'il gère le flex en colonne */
+.liste-tp li.dossier {
+    flex-direction: column;
+    align-items: stretch; /* Prend toute la largeur */
+    padding: 0; /* On gère le padding dans les sous-éléments */
+    
+    /* On annule la transformation au survol pour le conteneur principal */
+    /* On garde l'ombre et la bordure */
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-#error-message {
-  color: #ff7070;
-  margin-top: 10px;
+/* Annule l'effet de "monter" au survol pour le dossier */
+.liste-tp li.dossier:hover {
+    transform: none; 
 }
 
-/* ===========================
-   PETITS EFFETS
-   =========================== */
-nav, header, main, .login-container {
-  transition: background 0.3s ease, transform 0.3s ease;
+/* L'en-tête du dossier (qui remplace le <li> de base) */
+.dossier-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 25px; /* Recrée le padding du <li> original */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
-.menu > li > a, .submenu li a, button {
-  transition: all 0.25s ease;
+/* Ajoute un léger fond au survol de l'en-tête */
+.liste-tp li.dossier:hover .dossier-header {
+    background-color: rgba(101, 99, 255, 0.05);
+}
+
+/* Style du bouton pour déplier */
+.btn-toggle-dossier {
+    background-color: transparent;
+    color: var(--accent-lumiere);
+    border: 1px solid var(--accent-lumiere);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-family: 'Source Code Pro', monospace;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+    white-space: nowrap;
+}
+
+.btn-toggle-dossier:hover {
+    background-color: var(--accent-lumiere);
+    color: var(--fond-profond);
+}
+
+/* La flèche */
+.btn-toggle-dossier .arrow {
+    display: inline-block;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+/* Quand le dossier est ouvert (classe 'active' sur le bouton) */
+.btn-toggle-dossier.active .arrow {
+    transform: rotate(90deg); /* La flèche pivote */
+}
+
+/* La sous-liste qui contient les fichiers */
+.sous-liste-fichiers {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0 20px; /* Indentation à gauche */
+    border-top: 1px solid var(--bordure-verre);
+    background: rgba(0,0,0, 0.2); /* Fond légèrement différent */
+    
+    /* L'astuce pour l'animation : cachée par défaut */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+
+/* Classe 'visible' ajoutée par le JS pour montrer la liste */
+.sous-liste-fichiers.visible {
+    max-height: 500px; /* Valeur assez grande pour contenir les fichiers */
+    transition: max-height 0.4s ease-in;
+    padding-bottom: 10px; /* Un peu d'espace en bas */
+}
+
+/* Style pour les <li> de la sous-liste */
+.sous-liste-fichiers li {
+    margin: 10px 20px 0 20px; /* Marge haut, droite/gauche */
+    border-color: rgba(101, 99, 255, 0.3); /* Bordure plus légère */
+}
+
+/* ==========================================================================
+   12. STYLES ICONES POUR BOUTONS VOIR/TELECHARGER (VERSION GLOW BLEU)
+   ========================================================================== */
+
+/* Style général (bouton invisible) */
+.btn-view, .btn-download {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    font-size: 0;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    text-decoration: none;
+    transform: none;
+}
+
+/* Les icônes elles-mêmes (état normal) */
+.btn-view img, .btn-download img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    
+    /* ### CORRECTION MAJEURE ###
+       On retire le filtre de base.
+       Vos icônes ont déjà la bonne couleur, pas besoin de les modifier.
+    */
+    filter: none; 
+    
+    /* On garde les transitions pour le filtre (glow) et la transformation (scale) */
+    transition: filter 0.2s ease-out, transform 0.2s ease-out;
+}
+
+/* Règle pour forcer le fond transparent au survol (corrige le bug du carré) */
+.btn-view:hover,
+.btn-download:hover {
+    background: transparent !important;
+    box-shadow: none !important;
+    transform: none;
+}
+
+/* ### NOUVEL EFFET DE SURVOL ###
+   On applique un "glow" (drop-shadow) de la couleur de l'icône
+   et on zoome légèrement.
+*/
+.btn-view:hover img,
+.btn-download:hover img {
+    /* Applique un "glow" (ombre portée) de la couleur --accent-lumiere */
+    filter: drop-shadow(0 0 8px var(--accent-lumiere));
+    
+    /* Ajoute un léger zoom pour le dynamisme */
+    transform: scale(1.15);
+}
+
+/* Conteneur des actions */
+.file-actions {
+    display: flex;
+    gap: 8px; /* Espace entre les icônes */
+    align: center;
+}
+
+/* ==========================================================================
+   13. STYLES VISIONNEUSE AVANCÉE ET DESCRIPTION DE FICHIER
+   ========================================================================== */
+
+/* --- Rendre le conteneur "relative" pour positionner le bouton "X" --- */
+.viewer-container {
+    position: relative; 
+}
+
+/* --- Le nouveau bouton "Fermer" (X) --- */
+.btn-close-viewer {
+    position: absolute;
+    top: 15px; /* Aligné avec le padding du conteneur */
+    right: 15px; /* Aligné avec le padding du conteneur */
+    z-index: 10; /* Au-dessus de l'iframe */
+    
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    
+    background-color: var(--fond-profond); /* Fond sombre */
+    color: var(--texte-clair); /* Couleur du "X" */
+    
+    border: 1px solid var(--bordure-verre);
+    border-radius: 50%; /* Rond */
+    
+    font-family: 'Source Code Pro', monospace;
+    font-size: 24px; /* Taille du "X" */
+    line-height: 35px; /* Centre verticalement le "X" */
+    
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.btn-close-viewer:hover {
+    background-color: var(--accent-lumiere);
+    color: var(--fond-profond);
+    transform: scale(1.1) rotate(90deg); /* Effet sympa au survol */
+    border-color: var(--accent-lumiere);
+}
+
+/* --- Structure pour les infos de fichier --- */
+/* (Ceci s'assure que le titre et la description sont à gauche) */
+.file-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligne le texte à gauche */
+    gap: 4px; /* Espace entre le titre et la description */
+}
+
+/* --- Style de la nouvelle description de fichier --- */
+.file-description {
+    font-size: 0.8em; /* Plus petit */
+    color: #B0B3C6; /* Couleur du texte secondaire */
+    opacity: 0.7; /* Légèrement estompé */
+    font-weight: 400;
+}
+
+/* ==========================================================================
+   14. FORMULAIRE DE CONTACT (Simple Mailto)
+   ========================================================================== */
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espace entre les champs */
+    width: 100%;
+    max-width: 600px; /* Largeur max du formulaire */
+    margin: 25px auto 0 auto; /* Espace au-dessus du formulaire */
+    text-align: left;
+    position: relative;
+    z-index: 3; /* S'assure qu'il est au-dessus de l'image .animated-mail-img */
+}
+
+/* Style commun pour les champs de texte et la zone de texte */
+/* NOUVEAU CODE */
+.contact-form input[type="text"],
+.contact-form input[type="password"],
+.contact-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    box-sizing: border-box; 
+    background: rgba(5, 6, 24, 0.7); 
+    color: var(--texte-clair); 
+    border: 1px solid var(--bordure-verre); 
+    border-radius: 5px;
+    font-family: 'Source Code Pro', monospace; 
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+/* Style des "placeholders" (texte indicatif) */
+.contact-form input[type="text"]::placeholder,
+.contact-form input[type="password"]::placeholder,
+.contact-form textarea::placeholder {
+    color: #B0B3C6;
+    opacity: 0.7;
+}
+
+/* Effet "Glow" quand on clique sur un champ */
+.contact-form input[type="text"]:focus,
+.contact-form input[type="password"]:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent-lue);
+    box-shadow: 0 0 15px rgba(101, 99, 255, 0.3);
+}
+
+/* Style des "placeholders" (texte indicatif) */
+.contact-form input[type="text"]::placeholder,
+.contact-form textarea::placeholder {
+    color: #B0B3C6;
+    opacity: 0.7;
+}
+
+
+
+/* Le bouton "Envoyer".
+  Il réutilise la classe .contact-email que vous aviez déjà,
+  il suffit de lui enlever la bordure et d'ajouter le curseur.
+*/
+.contact-form .contact-email {
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* ==========================================================================
+   15. COPYRIGHT FOOTER
+   ========================================================================== */
+
+.copyright {
+    text-align: center;
+    padding: 20px 15px;
+    font-size: 0.9em;
+    color: #B0B3C6; /* Couleur de texte secondaire */
+    opacity: 0.6;   /* Légèrement estompé pour rester discret */
+    background-color: var(--fond-profond); /* Garde le même fond sombre */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   16. PAGE DE CONNEXION (LOGIN)
+   ========================================================================== */
+
+/* Conteneur principal de la page de connexion */
+.login-page {
+    width: 100%;
+    height: 100vh; /* Prend tout l'écran */
+    overflow: hidden; /* Empêche de scroller */
+    
+    /* Centre la boîte de connexion */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Positionne le fond Spline pour qu'il soit derrière */
+.login-page .spline-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* La boîte de connexion (au-dessus du fond) */
+.login-page .login-box {
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    z-index: 10;
+    text-align: center;
+}
+
+/* Adapte le H2 pour la boîte de connexion */
+.login-page .login-box h2 {
+    font-size: 2em; /* Plus petit que le H2 du contact */
+}
+
+/* Message d'erreur (caché par défaut) */
+.login-page .error-message {
+    display: none;
+    color: #ff6b6b; /* Rouge pour l'erreur */
+    font-size: 0.9em;
+    margin-top: 10px;
+    text-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+}
+
+/* Animation de tremblement pour l'erreur */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    50% { transform: translateX(8px); }
+    75% { transform: translateX(-8px); }
+    100% { transform: translateX(0); }
+}
+
+.login-box.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* --- Animation de sortie pour la boîte de connexion --- */
+
+/* Ajoute une transition à la boîte (pour l'animer en douceur) */
+/* Ajoute une transition à la boîte (pour l'animer en douceur) */
+.login-page .login-box {
+    /* ... */
+    /* On change "ease-in" en "ease-out" */
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+
+/* L'état "sortant" : descend et disparaît */
+/* L'état "sortant" : descend (ET RESTE VISIBLE) */
+/* L'état "sortant" : descend ET DISPARAÎT */
+.login-page .login-box.exiting {
+    transform: translateY(150px);
+    opacity: 0; /* On le remet ! */
+}
+
+/* ==========================================================================
+   17. ANIMATION "BIENVENUE"
+   ========================================================================== */
+
+.welcome-text {
+    /* Style */
+    font-size: 3.5em; /* Assez grand */
+    font-weight: 900;
+    color: var(--texte-clair);
+    text-shadow: 0 0 15px rgba(101, 99, 255, 0.4);
+    
+    /* Position (caché par défaut) */
+    position: absolute;
+    z-index: 5; /* En dessous du login-box (10), mais au-dessus du spline (1) */
+    opacity: 0;
+    
+    /* Prêt à monter */
+    transform: translateY(100px); 
+}
+
+/* L'animation "yoyo" (monte, pause, redescend) */
+@keyframes welcome-yoyo {
+    0% {
+        opacity: 0;
+        transform: translateY(100px); /* Commence en bas, caché */
+    }
+    30% {
+        opacity: 1;
+        transform: translateY(0); /* Monte au centre */
+    }
+    70% {
+        opacity: 1;
+        transform: translateY(0); /* Reste au centre (pause) */
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100px); /* Redescend, caché */
+    }
+}
+
+/* La classe que le JavaScript ajoute pour déclencher l'animation */
+/* L'animation dure 1.5 secondes (1500ms) */
+.welcome-text.animate {
+    animation: welcome-yoyo 1.5s ease-in-out forwards;
+}
+
+.aesthetic-intro h1 {
+    color: var(--texte-clair);
+    font-size: 5vw;
+    font-weight: 900;
+    line-height: 0.9;
+    margin: 0;
+    text-transform: uppercase;
+    text-shadow: 4px 4px 0px rgba(5, 6, 24, 1); 
+    
+    /* ### LIGNE À AJOUTER ### */
+    animation: textFloatAnimation 3s ease-in-out infinite;
+}
+
+.aesthetic-intro .subtitle {
+    color: var(--accent-lumiere);
+    font-size: 1.2rem;
+    margin-top: 15px;
+    letter-spacing: 2px;
+    font-weight: 400;
+    text-shadow: 0 0 10px rgba(101, 99, 255, 0.4);
+    
+    /* ### LIGNE À AJOUTER (OPTIONNELLE) ### */
+    animation: textFloatAnimation 3s ease-in-out infinite;
+    animation-delay: 0.3s; /* Léger décalage */
 }

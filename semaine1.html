@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semaine 1 - Mon Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+
+    <nav class="navbar" id="main-navbar">
+        <a href="portfolio.html#accueil">Accueil</a>
+        <a href="portfolio.html#apropos">À propos</a>
+        <a href="portfolio.html#td">TD</a>
+        <a href="portfolio.html#cours">Cours</a>
+        <a href="portfolio.html#certification">Certification</a>
+        <a href="portfolio.html#projet-final">Projet Final</a>
+        <a href="portfolio.html#contact">Contact</a>
+    </nav>
+
+    <main class="page-entry-transition">
+        <section class="section-contenu">
+            
+            <a href="portfolio.html#td" class="back-link">&larr; Revenir aux TD</a>
+            
+            <h2>Semaine 1 : PGI</h2>
+            <p>Cliquez sur "Voir" pour afficher le document directement sur cette page.</p>
+            
+            <ul class="liste-tp" style="max-width: 800px;">
+                <li>
+                    <div class="file-info">
+                        <strong>TD 1 SI</strong>
+                        <span class="file-description">TD 1 SI.pdf</span>
+                    </div>
+                    <div class="file-actions">
+                        <button class="btn-view" data-src="fichiers/s1/TD 1 SI.pdf">
+                            <img src="images/icons/icon-view.png" alt="Voir le document">
+                        </button>
+                        <a href="fichiers/s1/TD 1 SI.pdf" download class="btn-download">
+                            <img src="images/icons/icon-download.png" alt="Télécharger le document">
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="file-info">
+                        <strong>TD PGI exercice</strong>
+                        <span class="file-description">td_PGI_exercice.pdf</span>
+                    </div>
+                    <div class="file-actions">
+                        <button class="btn-view" data-src="fichiers/s1/td_PGI_exercice.pdf">
+                            <img src="images/icons/icon-view.png" alt="Voir le document">
+                        </button>
+                        <a href="fichiers/s1/td_PGI_exercice.pdf" download class="btn-download">
+                            <img src="images/icons/icon-download.png" alt="Télécharger le document">
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="file-info">
+                        <strong>TD 2</strong>
+                        <span class="file-description">td2.pdf</span>
+                    </div>
+                    <div class="file-actions">
+                        <button class="btn-view" data-src="fichiers/s1/td2.pdf">
+                            <img src="images/icons/icon-view.png" alt="Voir le document">
+                        </button>
+                        <a href="fichiers/s1/td2.pdf" download class="btn-download">
+                            <img src="images/icons/icon-download.png" alt="Télécharger le document">
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="file-info">
+                        <strong>Exercice PGI</strong>
+                        <span class="file-description">PGI_exercice.xls</span>
+                    </div>
+                    <div class="file-actions">
+                        <button class="btn-view" data-src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRByIY7TS9ayFBxstxnur9S0O_czoHIi2UEy9Jg9kTwOeKDMyyyUUW39tI8Y8y2-eN1t9nM88gJpa9w/pubhtml?widget=true&amp;headers=false">
+                            <img src="images/icons/icon-view.png" alt="Voir le document">
+                        </button>
+                        <a href="fichiers/s1/PGI_exercice.xls" download class="btn-download">
+                            <img src="images/icons/icon-download.png" alt="Télécharger le document">
+                        </a>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="viewer-container" id="viewer-container" style="display: none;">
+                <button class="btn-close-viewer" id="btn-close-viewer" title="Fermer">&times;</button>
+                <iframe id="viewer-frame" src="" width="100%" height="100%" frameborder="0"></iframe>
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const viewButtons = document.querySelectorAll('.btn-view');
+            const viewerContainer = document.getElementById('viewer-container');
+            const viewerFrame = document.getElementById('viewer-frame');
+            // Récupérer le bouton "Fermer"
+            const closeButton = document.getElementById('btn-close-viewer');
+
+            // Logique pour ouvrir
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const fileUrl = this.getAttribute('data-src');
+                    viewerFrame.setAttribute('src', fileUrl);
+                    viewerContainer.style.display = 'block';
+                    viewerContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+            });
+
+            // Logique pour fermer
+            if (closeButton && viewerContainer) {
+                closeButton.addEventListener('click', () => {
+                    viewerContainer.style.display = 'none';
+                    viewerFrame.setAttribute('src', ''); 
+                });
+            }
+        });
+    </script>
+</body>
+</html>
