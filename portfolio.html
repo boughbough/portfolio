@@ -37,8 +37,9 @@
         </section>
 
         <section class="section-contenu" id="apropos">
-            <img src="images/profile.png" alt="Ordinateur" class="animated-computer-gif">
-            <div class="apropos-text-container">
+            <img src="images/profile.png" alt="Ordinateur" class="animated-computer-gif reveal">
+            
+            <div class="apropos-text-container reveal">
                 <h2>À propos de moi</h2>
                 <p>
                     Étudiant passionné par les <strong>Systèmes d'Information</strong>, je m'intéresse particulièrement à l'architecture réseau, à la gestion de bases de données et au développement web.
@@ -50,9 +51,10 @@
         </section>
 
         <section class="section-contenu" id="td">
-            <h2>Travaux Dirigés (TD)</h2>
-            <p>Voici les différents travaux pratiques que j'ai réalisés dans le cadre de ce cours.</p>
-            <div class="carousel">
+            <h2 class="reveal">Travaux Dirigés (TD)</h2>
+            <p class="reveal">Voici les différents travaux pratiques que j'ai réalisés dans le cadre de ce cours.</p>
+            
+            <div class="carousel reveal">
                 <div class="group">
                     <a href="semaine1.html" class="card">
                         <img src="images/icons/developpement-de-logiciels.png" alt="" class="card-icon">
@@ -62,7 +64,7 @@
                     <a href="semaine2.html" class="card">
                         <img src="images/icons/chart-pie-alt.png" alt="" class="card-icon">
                         <strong>TP 2 : Diagrammes - Odoo</strong>
-                        <p>Création de diagrammes (Cas d'utilisation, Séquence) et exploration des modules Odoo.</p>
+                        <p>Création de diagrammes et exploration Odoo.</p>
                     </a>
                     <a href="semaine3.html" class="card">
                         <img src="images/icons/parametre-de-flux-de-travail-alt.png" alt="" class="card-icon">
@@ -72,12 +74,12 @@
                     <a href="semaine4.html" class="card">
                         <img src="images/icons/diagramme-de-gantt.png" alt="" class="card-icon">
                         <strong>TP 4 : Gantt - MCD</strong>
-                        <p>Élaboration d'un planning projet (Diagramme de Gantt) et conception de base de données (MCD).</p>
+                        <p>Planning projet et conception BDD.</p>
                     </a>
                     <a href="semaine5.html" class="card">
                         <img src="images/icons/carte-reseau.png" alt="" class="card-icon">
-                        <strong>TP 5 : Class Diagram - Use Case</strong>
-                        <p>Modélisation UML : conception des diagrammes de classes et de cas d'utilisation.</p>
+                        <strong>TP 5 : UML</strong>
+                        <p>Modélisation : classes et cas d'utilisation.</p>
                     </a>
                 </div>
                 <div aria-hidden="true" class="group">
@@ -89,7 +91,7 @@
                     <a href="semaine2.html" class="card">
                         <img src="images/icons/chart-pie-alt.png" alt="" class="card-icon">
                         <strong>TP 2 : Diagrammes - Odoo</strong>
-                        <p>Création de diagrammes (Cas d'utilisation, Séquence) et exploration des modules Odoo.</p>
+                        <p>Création de diagrammes et exploration Odoo.</p>
                     </a>
                     <a href="semaine3.html" class="card">
                         <img src="images/icons/parametre-de-flux-de-travail-alt.png" alt="" class="card-icon">
@@ -99,12 +101,12 @@
                     <a href="semaine4.html" class="card">
                         <img src="images/icons/diagramme-de-gantt.png" alt="" class="card-icon">
                         <strong>TP 4 : Gantt - MCD</strong>
-                        <p>Élaboration d'un planning projet (Diagramme de Gantt) et conception de base de données (MCD).</p>
+                        <p>Planning projet et conception BDD.</p>
                     </a>
                     <a href="semaine5.html" class="card">
                         <img src="images/icons/carte-reseau.png" alt="" class="card-icon">
-                        <strong>TP 5 : Class Diagram - Use Case</strong>
-                        <p>Modélisation UML : conception des diagrammes de classes et de cas d'utilisation.</p>
+                        <strong>TP 5 : UML</strong>
+                        <p>Modélisation : classes et cas d'utilisation.</p>
                     </a>
                 </div>
             </div>
@@ -113,54 +115,67 @@
         <section class="section-contenu" id="cours">
             
             <div class="cours-text-container" style="max-width: 900px; margin-right: 0; text-align: center;">
-                <h2>Cours - Prise de Note</h2>
-                <p>Voici les différentes notes de cours que j'ai rédigées durant le semestre.</p>
+                <h2 class="reveal">Cours - Prise de Note</h2>
+                <p class="reveal">Voici les différentes notes de cours que j'ai rédigées durant le semestre.</p>
                 
                 <div class="cours-grid">
-                    
-                    <div class="cours-card">
-                        <img src="images/icons/notes.png" alt="Notes" class="cours-card-icon">
-                        <div class="file-info">
-                            <strong>Les livrables SI</strong>
-                        </div>
-                        <div class="file-actions">
-                            <button class="btn-view" data-src="fichiers/cours/les livrables SI.pdf">
-                                <img src="images/icons/icon-view.png" alt="Voir le document">
-                            </button>
-                            <a href="fichiers/cours/les livrables SI.pdf" download class="btn-download">
-                                <img src="images/icons/icon-download.png" alt="Télécharger le document">
-                            </a>
-                        </div>
-                    </div>
+    
+    <div class="cours-card reveal">
+        <div class="card-header-icon">
+            <img src="images/icons/notes.png" alt="Notes" class="cours-card-icon">
+        </div>
+        
+        <div class="file-info">
+            <span class="cours-tag">Méthodologie</span>
+            <strong>Les livrables SI</strong>
+            <p class="file-desc">Standards et formats attendus.</p>
+        </div>
 
-                    <div class="cours-card">
-                        <img src="images/icons/notes.png" alt="Gestion" class="cours-card-icon">
-                        <div class="file-info">
-                            <strong>Gestion de Projet</strong>
-                        </div>
-                        <div class="file-actions">
-                            <button class="btn-view" data-src="fichiers/cours/cours gestion de projet version étudiant.pdf">
-                                <img src="images/icons/icon-view.png" alt="Voir le document">
-                            </button>
-                            <a href="fichiers/cours/cours gestion de projet version étudiant.pdf" download class="btn-download">
-                                <img src="images/icons/icon-download.png" alt="Télécharger le document">
-                            </a>
-                        </div>
-                    </div>
+        <div class="file-actions">
+            <button class="btn-view" data-src="fichiers/cours/les livrables SI.pdf" title="Visionner">
+                <img src="images/icons/icon-view.png" alt="Voir">
+            </button>
+            <a href="fichiers/cours/les livrables SI.pdf" download class="btn-download" title="Télécharger">
+                <img src="images/icons/icon-download.png" alt="Télécharger">
+            </a>
+        </div>
+    </div>
 
-                </div> </div>
+    <div class="cours-card reveal reveal-delay-1">
+        <div class="card-header-icon">
+            <img src="images/icons/notes.png" alt="Gestion" class="cours-card-icon">
+        </div>
+        
+        <div class="file-info">
+            <span class="cours-tag">Organisation</span>
+            <strong>Gestion de Projet</strong>
+            <p class="file-desc">Planification et suivi opérationnel.</p>
+        </div>
+
+        <div class="file-actions">
+            <button class="btn-view" data-src="fichiers/cours/cours gestion de projet version étudiant.pdf" title="Visionner">
+                <img src="images/icons/icon-view.png" alt="Voir">
+            </button>
+            <a href="fichiers/cours/cours gestion de projet version étudiant.pdf" download class="btn-download" title="Télécharger">
+                <img src="images/icons/icon-download.png" alt="Télécharger">
+            </a>
+        </div>
+    </div>
+
+</div>
+            </div>
             
             <div class="viewer-container" id="viewer-container" style="display: none;">
                 <button class="btn-close-viewer" id="btn-close-viewer" title="Fermer">&times;</button>
                 <iframe id="viewer-frame" src="" width="100%" height="100%" frameborder="0"></iframe>
             </div>
 
-            </section>
+        </section>
 
         <div class="parallax-divider" style="background-image: url('images/image-parallax-2.jpg');"></div>
 
         <section class="section-contenu" id="certification">
-            <div class="cert-text-container">
+            <div class="cert-text-container reveal">
                 <h2>Certification</h2>
                 <p>Ici, tu peux parler des certifications que tu as passées (ex: ITIL, Cisco, etc.).</p>
 
@@ -190,21 +205,23 @@
                 </ul>
             </div>
             
-            <img src="images/degree.png" alt="Certificat" class="animated-cert-img">
+            <img src="images/degree.png" alt="Certificat" class="animated-cert-img reveal reveal-delay-1">
         </section>
 
         <div class="parallax-divider" style="background-image: url('images/image-parallax-3.jpg');"></div>
 
         <section class="section-contenu" id="projet-final">
-            <h2>Projet Final</h2>
-            <p>Description de mon projet de fin de semestre...</p>
+            <div class="reveal">
+                <h2>Projet Final</h2>
+                <p>Description de mon projet de fin de semestre...</p>
+            </div>
         </section>
 
         <footer class="parallax-section" id="contact" style="background-image: url('images/image-parallax-4.jpg');">
             
-            <img src="images/mail.gif" alt="Contact" class="animated-mail-img">
+            <img src="images/mail.gif" alt="Contact" class="animated-mail-img reveal">
 
-            <div class="glass-container contact-box-simple">
+            <div class="glass-container contact-box-simple reveal reveal-delay-1">
                 
                 <h3>Coordonnées</h3>
                 
@@ -221,21 +238,45 @@
             </div>
         </footer>
 
-    </main> <div class="copyright">
+    </main> 
+    
+    <div class="copyright">
         &copy; 2025 Mohamed Boughmadi. Tous droits réservés.
     </div>
 
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.59/build/spline-viewer.js"></script>
-<script type="module" src="https://unpkg.com/@splinetool/viewer@1.11.4/build/spline-viewer.js"></script>
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.11.4/build/spline-viewer.js"></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Revenir en haut au chargement (optionnel, selon vos préférences)
             window.scrollTo(0, 0);
             
-            /* --- SCROLLSPY --- */
+            /* --- 1. SCROLL REVEAL (ANIMATION D'APPARITION) --- */
+            const revealElements = document.querySelectorAll(".reveal");
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                        // On arrête d'observer une fois apparu pour ne pas rejouer l'anim
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                root: null,
+                threshold: 0.15, // Déclenche quand 15% de l'élément est visible
+                rootMargin: "0px 0px -50px 0px"
+            });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            
+            /* --- 2. SCROLLSPY (MENU ACTIF) --- */
             const sections = document.querySelectorAll("section[id], footer[id]");
             const navLinks = document.querySelectorAll(".navbar a");
 
-            const observer = new IntersectionObserver((entries) => {
+            const spyObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const id = entry.target.id;
@@ -251,15 +292,25 @@
             }, { threshold: 0.3 });
 
             sections.forEach(section => {
-                observer.observe(section);
+                spyObserver.observe(section);
             });
 
             
-            /* --- VISIONNEUSE DE FICHIERS (Votre code original) --- */
+            /* --- 3. VISIONNEUSE DE FICHIERS --- */
             const viewButtons = document.querySelectorAll('.btn-view');
             const viewerContainer = document.getElementById('viewer-container');
             const viewerFrame = document.getElementById('viewer-frame');
+            const btnCloseViewer = document.getElementById('btn-close-viewer');
 
+            // Fermeture de la visionneuse
+            if (btnCloseViewer && viewerContainer) {
+                btnCloseViewer.addEventListener('click', () => {
+                    viewerContainer.style.display = 'none';
+                    viewerFrame.setAttribute('src', ''); // Stop le chargement
+                });
+            }
+
+            // Ouverture de la visionneuse
             if (viewerContainer && viewerFrame) {
                 viewButtons.forEach(button => {
                     button.addEventListener('click', function() {
@@ -273,13 +324,13 @@
                 });
             }
 
-            /* --- ACCORDION DOSSIER (S'applique s'il y a des dossiers sur la page) --- */
+            /* --- 4. ACCORDION DOSSIER (Optionnel si utilisé ailleurs) --- */
             const folderHeaders = document.querySelectorAll('.dossier-header');
             folderHeaders.forEach(header => {
                 header.addEventListener('click', function() {
                     const toggleButton = this.querySelector('.btn-toggle-dossier');
                     const parentDossier = this.closest('.dmossier');
-                    const subList = parentDossier.querySelector('.sous-liste-fichiers');
+                    const subList = parentDossier ? parentDossier.querySelector('.sous-liste-fichiers') : null;
 
                     if (toggleButton) {
                         toggleButton.classList.toggle('active');
@@ -294,4 +345,3 @@
 
 </body>
 </html>
-

@@ -1,26 +1,17 @@
-/* Importation de la police "Source Code Pro" */
+/* ==========================================================================
+   1. IMPORTS, VARIABLES & RESET
+   ========================================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;900&display=swap');
 
-/* ==========================================================================
-   1. PALETTE DE COULEURS & VARIABLES (Thème Nuit & Violet)
-   ========================================================================== */
 :root {
     --fond-profond: #050618;
     --fond-section: #050618;
-    
-    /* --- NOUVELLE COULEUR D'ACCENT --- */
     --accent-lumiere: #6563ff;    /* Violet tech */
-    
     --texte-clair: #EAEBF3;
-    
-    /* --- Effets de verre mis à jour --- */
     --transparence-verre: rgba(5, 6, 24, 0.75);  
-    --bordure-verre: rgba(101, 99, 255, 0.2); /* Bordure violette */
+    --bordure-verre: rgba(101, 99, 255, 0.2);
 }
 
-/* ==========================================================================
-   2. STYLES GLOBAUX & ANIMATIONS
-   ========================================================================== */
 body, html {
     margin: 0;
     padding: 0;
@@ -32,14 +23,12 @@ body, html {
     overflow-x: hidden; 
 }
 
-/* ... (Toutes vos animations @keyframes ... ) ... */
-/* NOUVEAU CODE (Effet "Yoyo") */
+/* ==========================================================================
+   2. ANIMATIONS (@keyframes)
+   ========================================================================== */
 @keyframes pageEntry {
-    from { opacity: 0; transform: translateY(150px); } /* Monte de 150px */
+    from { opacity: 0; transform: translateY(150px); }
     to { opacity: 1; transform: translateY(0); }
-}
-.page-entry-transition {
-    animation: pageEntry 1s ease-out forwards;
 }
 @keyframes floatAnimation {
     0% { transform: translateY(-50%) translateX(0); }
@@ -64,21 +53,53 @@ body, html {
     from { transform: translateX(0); }
     to { transform: translateX(-100%); }
 }
-
-
-/* ### AJOUTEZ CECI ### */
-/* Animation simple de fondu pour le Spline */
 @keyframes simpleFadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    50% { transform: translateX(8px); }
+    75% { transform: translateX(-8px); }
+    100% { transform: translateX(0); }
+}
+@keyframes welcome-yoyo {
+    0% { opacity: 0; transform: translateY(100px); }
+    30% { opacity: 1; transform: translateY(0); }
+    70% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(100px); }
+}
 
+/* Classes utilitaires d'animation */
+.page-entry-transition {
+    animation: pageEntry 1s ease-out forwards;
+}
 .spline-fade-in {
-    /* L'animation dure un peu plus longtemps pour masquer le temps de chargement */
     animation: simpleFadeIn 1.5s ease-out forwards;
 }
+.login-box.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* --- SCROLL REVEAL (Apparition au défilement) --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+    will-change: opacity, transform;
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+
 /* ==========================================================================
-   3. BARRE DE NAVIGATION (NAVBAR)
+   3. BARRE DE NAVIGATION
    ========================================================================== */
 .navbar {
     position: fixed; 
@@ -110,6 +131,7 @@ body, html {
     text-shadow: 0 0 15px rgba(101, 99, 255, 0.6);
     transform: scale(1.1); 
 }
+
 
 /* ==========================================================================
    4. HERO SECTION (SPLINE)
@@ -149,9 +171,8 @@ body, html {
     animation: slideInLeft 1.5s ease-out forwards;
     animation-delay: 1s;
 }
-.aesthetic-intro a {
-    pointer-events: auto; 
-}
+.aesthetic-intro a { pointer-events: auto; }
+
 .aesthetic-intro h1 {
     color: var(--texte-clair);
     font-size: 5vw;
@@ -160,6 +181,7 @@ body, html {
     margin: 0;
     text-transform: uppercase;
     text-shadow: 4px 4px 0px rgba(5, 6, 24, 1); 
+    animation: textFloatAnimation 3s ease-in-out infinite;
 }
 .aesthetic-intro .subtitle {
     color: var(--accent-lumiere);
@@ -168,26 +190,11 @@ body, html {
     letter-spacing: 2px;
     font-weight: 400;
     text-shadow: 0 0 10px rgba(101, 99, 255, 0.4);
+    animation: textFloatAnimation 3s ease-in-out infinite;
+    animation-delay: 0.3s;
 }
-.continue-button {
-    font-size: 1.3em;
-    background: var(--accent-lumiere);
-    color: var(--fond-profond);
-    padding: 12px 25px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    display: inline-block; 
-    box-shadow: 0 0 10px rgba(101, 99, 255, 0.6);
-    transition: all 0.3s ease;
-    margin-top: 20px;
-}
-.continue-button:hover {
-    background: var(--texte-clair);
-    color: var(--fond-profond);
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(240, 235, 220, 0.8);
-}
+
+/* Indicateur de scroll */
 .scroll-indicator {
     position: absolute;
     bottom: 40px;
@@ -200,21 +207,10 @@ body, html {
     justify-content: center;
     gap: 15px;
 }
-.scroll-text {
-    font-size: 0.9em;
-    color: var(--texte-clair);
-    opacity: 0.7;
-    letter-spacing: 1px;
-}
-.scroll-line {
-    width: 80px;
-    height: 1px;
-    background: var(--accent-lumiere);
-    opacity: 0.3;
-}
+.scroll-text { font-size: 0.9em; color: var(--texte-clair); opacity: 0.7; letter-spacing: 1px; }
+.scroll-line { width: 80px; height: 1px; background: var(--accent-lumiere); opacity: 0.3; }
 .scroll-icon {
-    width: 16px; 
-    height: 24px;
+    width: 16px; height: 24px;
     border: 2px solid var(--accent-lumiere);
     border-radius: 12px;
     position: relative;
@@ -223,18 +219,17 @@ body, html {
 .scroll-icon::before {
     content: '';
     position: absolute;
-    top: 5px;
-    left: 50%;
+    top: 5px; left: 50%;
     transform: translateX(-50%);
-    width: 4px;
-    height: 4px;
+    width: 4px; height: 4px;
     background: var(--accent-lumiere);
     border-radius: 50%;
     animation: scrollBall 2s ease-in-out infinite;
 }
 
+
 /* ==========================================================================
-   5. SECTIONS DE CONTENU (Général)
+   5. SECTIONS DE CONTENU & IMAGES FLOTTANTES
    ========================================================================== */
 .section-contenu {
     padding: 80px 40px; 
@@ -249,8 +244,6 @@ body, html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-top: none; 
-    border-bottom: none;
 }
 .section-contenu h2 {
     font-size: 2.8em; 
@@ -271,126 +264,40 @@ body, html {
     color: #B0B3C6;
 }
 
-/* ==========================================================================
-   6. SECTIONS SPÉCIFIQUES (À Propos, Intro, Cours, Certif...)
-   ========================================================================== */
-
-/* --- Section Intro (Ordi) --- */
-#intro { flex-direction: row; }
-.accueil-titre {
-    font-size: 4em; 
-    margin: 0 0 15px 0;
-    color: var(--accent-lumiere);
-    text-shadow: 0 0 20px rgba(101, 99, 255, 0.6);
-    animation: textFloatAnimation 3s ease-in-out infinite;
-    animation-delay: 0.5s; 
+/* Images Décoratives (Gifs) */
+.animated-computer-gif, .animated-book-gif, .animated-cert-img, .animated-mail-img {
+    position: absolute;
+    z-index: 1;
+    animation: floatAnimation 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(101, 99, 255, 0.2));
 }
-.accueil-text-container {
-    position: relative;
-    z-index: 2;
-    max-width: 50%;
-    margin-left: 45%;
-    text-align: left;
+
+/* Section À Propos */
+.apropos-text-container {
+    position: relative; z-index: 2; max-width: 55%; margin-left: 40%; text-align: left; 
 }
 .animated-computer-gif {
-    position: absolute;
-    left: 15%; /* Recentré */
-    top: 50%;
-    transform: translateY(-50%);
-    max-width: 450px;
-    height: auto;
-    z-index: 1; 
-    animation: floatAnimation 3s ease-in-out infinite; 
-    filter: drop-shadow(0 0 20px rgba(101, 99, 255, 0.2));
+    left: 15%; top: 50%; transform: translateY(-50%); max-width: 450px;
 }
 
-/* --- Section À Propos --- */
-.apropos-text-container {
-    position: relative;
-    z-index: 2;
-    max-width: 55%;   
-    margin-left: 40%; 
-    text-align: left; 
-}
-
-/* --- Section Cours (Livre) --- */
-.cours-text-container {
-    position: relative;
-    z-index: 2; 
-    max-width: 60%;
-    margin-right: 35%; 
-    text-align: left;
-    width: 100%;
-}
-.animated-book-gif {
-    position: absolute;
-    right: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-    max-width: 300px; 
-    height: auto;
-    z-index: 1;
-    animation: floatAnimation 3s ease-in-out infinite; 
-    filter: drop-shadow(0 0 20px rgba(101, 99, 255, 0.2));
-}
-
-/* --- Section Certification --- */
+/* Section Certification */
 .cert-text-container {
-    position: relative;
-    z-index: 2; 
-    max-width: 60%;
-    margin-right: 35%; 
-    text-align: left;
-    width: 100%;
+    position: relative; z-index: 2; max-width: 60%; margin-right: 35%; text-align: left; width: 100%;
 }
 .animated-cert-img {
-    position: absolute;
-    right: 10%;
-    top: 50%;
-    transform: translateY(-50%);
-    max-width: 350px; 
-    height: auto;
-    z-index: 1;
-    animation: floatAnimation 3s ease-in-out infinite; 
-    animation-delay: 1s;
-    filter: drop-shadow(0 0 20px rgba(101, 99, 255, 0.2));
+    right: 10%; top: 50%; transform: translateY(-50%); max-width: 350px; animation-delay: 1s;
 }
+
+/* Section Cours (Grille spéciale sans image flottante) */
+#cours .animated-book-gif { display: none; }
+#cours .cours-text-container {
+    max-width: 900px !important; margin: 0 auto !important; text-align: center !important; width: 100%;
+}
+
 
 /* ==========================================================================
-   7. LISTES & LIENS
+   6. CARROUSEL PREMIUM (TD)
    ========================================================================== */
-
-/* --- Liste de TP Générique (pour Cours, Certif) --- */
-.liste-tp {
-    list-style: none;
-    padding: 0;
-    max-width: 700px; 
-    margin: 30px auto; 
-    text-align: left;
-    position: relative;
-    z-index: 2;
-}
-.liste-tp li {
-    background: rgba(5, 6, 24, 0.6);
-    border: 1px solid rgba(101, 99, 255, 0.15);
-    margin-bottom: 15px;
-    padding: 18px 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 8px; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4); 
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-.liste-tp li:hover {
-    transform: translateY(-5px); 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.6), 0 0 15px rgba(101, 99, 255, 0.2);
-    border-color: var(--accent-lumiere);
-    cursor: pointer; /* Indique que la ligne est cliquable */
-}
-.liste-tp strong { color: var(--texte-clair); font-size: 1.1em; }
-
-/* --- Carrousel (Section TD) --- */
 .carousel {
     margin: 50px auto;
     width: 100%;
@@ -400,9 +307,8 @@ body, html {
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
     mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
 }
-.carousel::-webkit-scrollbar {
-    display: none;
-}
+.carousel::-webkit-scrollbar { display: none; }
+
 .group {
     display: flex;
     gap: 25px;
@@ -410,905 +316,429 @@ body, html {
     padding: 20px 10px;
     padding-right: 25px;
 }
-.carousel:hover .group {
-    animation-play-state: paused;
-}
-.card {
-    flex: 0 0 320px;
-    height: 250px;
-    padding: 30px;
-    box-sizing: border-box;
-    background: var(--fond-section); 
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px; 
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5); 
+.carousel:hover .group { animation-play-state: paused; }
+
+/* STYLE CARTE PREMIUM */
+.carousel .card {
+    /* Fond: Dégradé subtil */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
+    
+    /* Bordure: Fine et élégante */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    
+    /* Effet 3D subtil */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    
+    border-radius: 20px;
+    padding: 25px;
+    min-width: 220px;
+    text-decoration: none;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    text-align: left;
-    text-decoration: none; 
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    gap: 12px;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    backdrop-filter: blur(10px);
+    
+    /* Initialisation pour interactions */
+    position: relative;
+    overflow: hidden;
 }
-.card:hover {
-    transform: translateY(-10px); 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-    border-color: var(--bordure-verre);
+
+/* Titre */
+.carousel .card strong {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(90deg, #ffffff, #a5b4fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
-.card-icon {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 20px;
-    filter: drop-shadow(0 0 10px rgba(101, 99, 255, 0.3));
+/* Paragraphe */
+.carousel .card p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0;
 }
-.card strong {
-    font-size: 1.3em;
-    color: var(--texte-clair); 
-    margin-bottom: 10px;
-    text-shadow: none; 
-    white-space: normal;
-    word-break: break-word;
-    line-height: 1.2;
+
+/* Icône avec "nid" */
+.carousel .card-icon {
+    width: 45px;
+    height: 45px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    margin-bottom: 5px;
+    transition: transform 0.3s ease;
 }
-.card p {
-    font-size: 1em;
+
+/* Interaction au survol */
+.carousel .card:hover {
+    transform: translateY(-8px);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.carousel .card:hover .card-icon {
+    transform: scale(1.1) rotate(5deg);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+
+/* ==========================================================================
+   7. GRILLE DES COURS & CARTES STANDARDS
+   ========================================================================== */
+/* ==========================================================================
+   SECTION COURS - STYLE FICHE TECHNIQUE
+   ========================================================================== */
+
+.cours-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.cours-card {
+    /* Fond sombre et subtil pour faire ressortir le contenu */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 25px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+/* Effet "Top Border" lumineux pour donner du relief */
+.cours-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-lumiere), transparent);
+    opacity: 0.5;
+}
+
+/* --- Interaction Survol --- */
+.cours-card:hover {
+    transform: translateY(-8px);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+    border-color: rgba(101, 99, 255, 0.3);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+/* Icône principale */
+.cours-card-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 15px;
+    filter: brightness(0) invert(1); /* Blanc propre */
+    opacity: 0.9;
+    transition: transform 0.3s ease;
+}
+.cours-card:hover .cours-card-icon {
+    transform: scale(1.1) rotate(-5deg);
+    filter: drop-shadow(0 0 8px var(--accent-lumiere)) brightness(0) invert(1);
+}
+
+/* Infos Fichier */
+.file-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+/* NOUVEAU : Le Tag (Étiquette) */
+.cours-tag {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: var(--accent-lumiere);
+    background: rgba(101, 99, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(101, 99, 255, 0.2);
+}
+
+/* Titre */
+.cours-card strong {
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* Description courte */
+.file-desc {
+    font-size: 0.85rem;
     color: #B0B3C6;
     margin: 0;
-    line-height: 1.5; 
-    white-space: normal;
-    word-break: break-word;
+    opacity: 0.8;
 }
 
-/* --- Boutons Fichiers (Page Semaine) --- */
+/* Actions (Boutons) - Alignés en bas */
 .file-actions {
+    margin-top: auto; /* Pousse les boutons vers le bas */
     display: flex;
-    gap: 15px; /* Espace entre les deux boutons */
-}
-/* Style du bouton "Visionner" (Violet) */
-.btn-view {
-    background-color: var(--accent-lumiere);
-    color: var(--fond-profond);
-    padding: 8px 15px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    border: none;
-    cursor: pointer;
-    font-family: 'Source Code Pro', monospace;
-    font-size: 0.9em;
-}
-.btn-view:hover {
-    background-color: var(--texte-clair);
-    color: var(--fond-profond);
-    transform: scale(1.05);
-}
-/* Style du bouton "Télécharger" (Contour Violet) */
-.btn-download {
-    background-color: transparent;
-    color: var(--accent-lumiere);
-    padding: 8px 15px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    border: 1px solid var(--accent-lumiere);
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    font-size: 0.9em;
-}
-.btn-download:hover {
-    background-color: var(--accent-lumiere);
-    color: var(--fond-profond);
-    transform: scale(1.05);
-}
-
-/* --- Lien "Retour" --- */
-.back-link {
-    display: inline-block;
-    color: var(--accent-lumiere);
-    text-decoration: none;
-    font-weight: 600;
-    margin-bottom: 30px;
-    transition: transform 0.2s ease;
-}
-.back-link:hover {
-    transform: translateX(-5px);
-    text-shadow: 0 0 10px var(--accent-lumiere);
-}
-
-/* --- Visionneuse PDF/Sheets (REMIS À NEUF) --- */
-.viewer-container {
-    width: 90%;
-    max-width: 800px; /* Garde la largeur max */
-    margin: 40px auto 0 auto;
-    
-    /* Effet "Glassmorphism" */
-    background: var(--transparence-verre); /* Fond verre dépoli */
-    backdrop-filter: blur(10px); 
-    -webkit-backdrop-filter: blur(10px);
-    
-    /* Effet "Bezel" (cadre interne) */
-    padding: 15px; /* Ajoute un espace entre le cadre et l'écran */
-    box-sizing: border-box; /* Pour que le padding n'augmente pas la taille */
-    
-    /* Effet "Glow" et bordure */
-    border: 1px solid var(--bordure-verre); 
-    border-radius: 12px; /* Coins plus arrondis pour le cadre */
-    box-shadow: 0 0 25px rgba(101, 99, 255, 0.2), 0 5px 20px rgba(0,0,0,0.5); /* Glow + Ombre */
-}
-
-.viewer-container iframe {
+    gap: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
     width: 100%;
-    height: 600px; /* Hauteur de l'écran */
-    border: none;
-    border-radius: 6px; /* Coins arrondis pour "l'écran" (iframe) */
-    display: block; /* Évite les petits espaces fantômes */
+    justify-content: center;
 }
-.excel-title {
-    font-size: 1.5em;
-    color: var(--accent-lumiere);
-    text-shadow: 0 0 10px var(--accent-lumiere);
-    margin-top: 40px;
-}
+
 
 /* ==========================================================================
-   8. PARALLAX DIVIDERS
+   8. LISTES, FICHIERS & DOSSIERS (ACCORDION)
    ========================================================================== */
-.parallax-section, .parallax-divider {
-    min-height: 500px; 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; 
-    background-attachment: fixed; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 40px; 
-    box-sizing: border-box; 
+.liste-tp {
+    list-style: none; padding: 0; max-width: 700px; margin: 30px auto; text-align: left;
+    position: relative; z-index: 2;
+}
+.liste-tp li {
+    background: rgba(5, 6, 24, 0.6);
+    border: 1px solid rgba(101, 99, 255, 0.15);
+    margin-bottom: 15px;
+    padding: 18px 25px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-radius: 8px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4); 
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.liste-tp li:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6), 0 0 15px rgba(101, 99, 255, 0.2);
+    border-color: var(--accent-lumiere);
+}
+.liste-tp strong { color: var(--texte-clair); font-size: 1.1em; }
+
+/* Dossier (Accordion) */
+.liste-tp li.dossier { flex-direction: column; align-items: stretch; padding: 0; }
+.liste-tp li.dossier:hover { transform: none; }
+.liste-tp li.dossier:hover .dossier-header { background-color: rgba(101, 99, 255, 0.05); }
+
+.dossier-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 25px; cursor: pointer; transition: background-color 0.2s ease;
+}
+.btn-toggle-dossier {
+    background-color: transparent; color: var(--accent-lumiere);
+    border: 1px solid var(--accent-lumiere);
+    padding: 8px 15px; border-radius: 5px;
+    font-weight: bold; font-family: 'Source Code Pro', monospace;
+    cursor: pointer; transition: all 0.3s ease; font-size: 0.9em;
+}
+.btn-toggle-dossier:hover { background-color: var(--accent-lumiere); color: var(--fond-profond); }
+.btn-toggle-dossier .arrow { display: inline-block; margin-right: 8px; transition: transform 0.3s ease; }
+.btn-toggle-dossier.active .arrow { transform: rotate(90deg); }
+
+.sous-liste-fichiers {
+    list-style: none; padding: 0; margin: 0 0 0 20px; border-top: 1px solid var(--bordure-verre);
+    background: rgba(0,0,0, 0.2); max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
+}
+.sous-liste-fichiers.visible { max-height: 500px; transition: max-height 0.4s ease-in; padding-bottom: 10px; }
+.sous-liste-fichiers li { margin: 10px 20px 0 20px; border-color: rgba(101, 99, 255, 0.3); }
+
+/* Boutons d'actions (Voir / Télécharger) */
+.file-actions { display: flex; gap: 8px; align-items: center; }
+.btn-view, .btn-download {
+    display: flex; justify-content: center; align-items: center;
+    width: 35px; height: 35px; padding: 0; font-size: 0;
+    background: transparent !important; border: none !important; box-shadow: none !important;
+    cursor: pointer; transition: all 0.2s ease-out; text-decoration: none; transform: none;
+}
+.btn-view img, .btn-download img {
+    width: 100%; height: 100%; object-fit: contain; filter: none;
+    transition: filter 0.2s ease-out, transform 0.2s ease-out;
+}
+.btn-view:hover img, .btn-download:hover img {
+    filter: drop-shadow(0 0 8px var(--accent-lumiere));
+    transform: scale(1.15);
+}
+
+
+/* ==========================================================================
+   9. VISIONNEUSE DE DOCUMENTS
+   ========================================================================== */
+.viewer-container {
+    width: 90%; max-width: 800px; margin: 40px auto 0 auto;
+    background: var(--transparence-verre); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    padding: 15px; box-sizing: border-box;
+    border: 1px solid var(--bordure-verre); border-radius: 12px;
+    box-shadow: 0 0 25px rgba(101, 99, 255, 0.2), 0 5px 20px rgba(0,0,0,0.5);
     position: relative;
 }
-.welcome-section::before,
-.parallax-section::before,
-.parallax-divider::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--fond-profond);
-    opacity: 0.7; /* Teinte sombre pour fondre les images */
-    z-index: 1; 
+.viewer-container iframe {
+    width: 100%; height: 600px; border: none; border-radius: 6px; display: block;
+}
+.btn-close-viewer {
+    position: absolute; top: 15px; right: 15px; z-index: 10;
+    width: 35px; height: 35px; padding: 0;
+    background-color: var(--fond-profond); color: var(--texte-clair);
+    border: 1px solid var(--bordure-verre); border-radius: 50%;
+    font-family: 'Source Code Pro', monospace; font-size: 24px; line-height: 35px;
+    cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.btn-close-viewer:hover {
+    background-color: var(--accent-lumiere); color: var(--fond-profond);
+    transform: scale(1.1) rotate(90deg); border-color: var(--accent-lumiere);
+}
+
+
+/* ==========================================================================
+   10. PARALLAX DIVIDERS & CONTACT
+   ========================================================================== */
+.parallax-section, .parallax-divider {
+    min-height: 500px; background-position: center; background-repeat: no-repeat;
+    background-size: cover; background-attachment: fixed;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 40px; box-sizing: border-box; position: relative;
 }
 .parallax-divider { min-height: 300px; }
+.parallax-section::before, .parallax-divider::before {
+    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--fond-profond); opacity: 0.7; z-index: 1;
+}
 
-/* ==========================================================================
-   9. SECTION CONTACT
-   ========================================================================== */
+/* Section Contact */
 .parallax-section#contact { min-height: 450px; }
-
-/* Image Mail */
 .animated-mail-img {
-    position: absolute;
-    left: 10%;
-    top: 40%;
-    max-width: 200px; 
-    height: auto;
-    z-index: 3;
-    animation: floatAnimation 4s ease-in-out infinite; 
-    filter: drop-shadow(0 0 15px rgba(101, 99, 255, 0.4));
-    pointer-events: none;
+    left: 10%; top: 40%; max-width: 200px; z-index: 3;
+    animation: floatAnimation 4s ease-in-out infinite; pointer-events: none;
 }
 
-/* Container Verre */
 .glass-container {
-    background: var(--transparence-verre);
-    backdrop-filter: blur(10px); 
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--bordure-verre);
-    border-radius: 15px; 
-    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5); 
-    padding: 40px 60px; 
-    text-align: center;
-    color: var(--texte-clair);
-    text-shadow: 0 0 15px rgba(101, 99, 255, 0.3);
-    max-width: 900px; 
-    transform: perspective(1000px) rotateX(0deg); 
-    transition: all 0.5s ease;
-    position: relative; 
-    z-index: 2;
+    background: var(--transparence-verre); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--bordure-verre); border-radius: 15px;
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5); padding: 40px 60px;
+    text-align: center; color: var(--texte-clair); text-shadow: 0 0 15px rgba(101, 99, 255, 0.3);
+    max-width: 900px; transform: perspective(1000px) rotateX(0deg); transition: all 0.5s ease;
+    position: relative; z-index: 2;
 }
-.glass-container h2 {
-    font-size: 4em; 
-    margin: 0 0 15px 0;
-    color: var(--accent-lumiere);
-    text-shadow: 0 0 20px rgba(101, 99, 255, 0.6);
-    animation: textFloatAnimation 3s ease-in-out infinite;
-    animation-delay: 0.4s;
+.contact-box-simple { padding: 30px 40px; max-width: 500px; }
+.contact-box-simple h3 {
+    font-size: 1.6em; color: var(--accent-lumiere); margin: 0 0 25px 0;
+    text-shadow: 0 0 10px var(--accent-lumiere);
 }
-.glass-container p { font-size: 1.3em; max-width: 700px; margin: 0 auto 25px auto; }
+.contact-list-simple {
+    list-style: none; padding: 0; margin: 0; display: inline-block; text-align: left;
+}
+.contact-list-simple li { display: flex; align-items: center; font-size: 1.1em; margin-bottom: 15px; }
+.contact-list-simple .contact-icon {
+    width: 24px; height: 24px; margin-right: 15px;
+    filter: brightness(0) invert(1) saturate(100%) hue-rotate(240deg) brightness(1.2);
+}
+.contact-list-simple a {
+    text-decoration: none; color: var(--texte-clair); transition: color 0.3s ease;
+}
+.contact-list-simple a:hover { color: var(--accent-lumiere); text-decoration: underline; }
 
-.contact-email {
-    font-size: 1.3em; 
-    background: var(--accent-lumiere);
-    color: var(--fond-profond);
-    padding: 12px 25px; 
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-    margin-top: 25px; 
-    display: inline-block; 
-    box-shadow: 0 0 15px rgba(101, 99, 255, 0.4);
-}
-.contact-email:hover {
-    background: var(--texte-clair);
-    color: var(--fond-profond);
-    transform: scale(1.05); 
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
-}
 
 /* ==========================================================================
-   10. RESPONSIVE DESIGN (Mobile)
+   11. PAGE DE CONNEXION (INDEX.HTML)
+   ========================================================================== */
+.login-page {
+    width: 100%; height: 100vh; overflow: hidden;
+    display: flex; justify-content: center; align-items: center;
+}
+.login-page .login-box {
+    width: 90%; max-width: 450px; position: relative; z-index: 10; text-align: center;
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+.login-page .login-box.exiting { transform: translateY(150px); opacity: 0; }
+.login-page .error-message {
+    display: none; color: #ff6b6b; font-size: 0.9em; margin-top: 10px;
+    text-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+}
+
+/* Champ Mot de Passe (Sobriety Style) */
+#password-input {
+    width: 100%; padding: 12px 15px; margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px; /* Arrondi sobre */
+    color: #ffffff; font-size: 1rem; outline: none;
+    transition: all 0.3s ease; text-align: center; font-family: inherit;
+}
+#password-input:focus {
+    background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.5);
+}
+#password-input::placeholder { color: rgba(255, 255, 255, 0.5); font-weight: 300; }
+
+/* Bouton Entrer (Sobriety Style) */
+.btn-login {
+    background: rgba(255, 255, 255, 0.9); color: #333; border: none;
+    padding: 10px 25px; border-radius: 12px;
+    font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    transition: all 0.2s ease; margin-top: 5px; display: inline-block;
+}
+.btn-login:hover {
+    background: #ffffff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Animation Bienvenue */
+.welcome-text {
+    font-size: 3.5em; font-weight: 900; color: var(--texte-clair);
+    text-shadow: 0 0 15px rgba(101, 99, 255, 0.4);
+    position: absolute; z-index: 5; opacity: 0; transform: translateY(100px);
+}
+.welcome-text.animate { animation: welcome-yoyo 1.5s ease-in-out forwards; }
+
+
+/* ==========================================================================
+   12. PIED DE PAGE
+   ========================================================================== */
+.copyright {
+    text-align: center; padding: 20px 15px; font-size: 0.9em;
+    color: #B0B3C6; opacity: 0.6; background-color: var(--fond-profond);
+    width: 100%; box-sizing: border-box;
+}
+
+
+/* ==========================================================================
+   13. RESPONSIVE (MOBILE)
    ========================================================================== */
 @media (max-width: 768px) {
     .aesthetic-intro { left: 5%; width: 90%; }
     .aesthetic-intro h1 { font-size: 3.5rem; }
     
-    /* Cache les images décoratives sur mobile */
-    .animated-book-gif, 
-    .animated-computer-gif, 
-    .animated-cert-img, 
-    .animated-mail-img { 
+    /* Cache les images flottantes sur mobile */
+    .animated-book-gif, .animated-computer-gif, .animated-cert-img, .animated-mail-img { 
         display: none; 
     }
     
     /* Centre les conteneurs de texte */
-    .cours-text-container, 
-    .accueil-text-container, 
-    .apropos-text-container, 
-    .cert-text-container { 
-        margin: 0 auto; 
-        max-width: 90%; 
-        text-align: center; 
+    .cours-text-container, .accueil-text-container, .apropos-text-container, .cert-text-container { 
+        margin: 0 auto !important; max-width: 90% !important; text-align: center !important; 
     }
-    
-    #intro { flex-direction: column; }
     
     .navbar a { padding: 10px 12px; font-size: 0.9em; }
-    .accueil-titre { font-size: 2.5em; }
 
-    /* Ajuste la liste de fichiers sur mobile */
-    .liste-tp li {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 15px;
-    }
-    .file-actions {
-        margin-top: 15px;
-        width: 100%;
-        justify-content: flex-end; /* Met les icônes à droite */
-    }
-}
+    .liste-tp li { flex-direction: column; align-items: flex-start; padding: 15px; }
+    .file-actions { margin-top: 15px; width: 100%; justify-content: flex-end; }
 
-/* ==========================================================================
-   11. STYLES DOSSIER (Accordion)
-   ========================================================================== */
-
-/* Modifie le <li> principal pour qu'il gère le flex en colonne */
-.liste-tp li.dossier {
-    flex-direction: column;
-    align-items: stretch; /* Prend toute la largeur */
-    padding: 0; /* On gère le padding dans les sous-éléments */
-    
-    /* On annule la transformation au survol pour le conteneur principal */
-    /* On garde l'ombre et la bordure */
-    transition: box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-/* Annule l'effet de "monter" au survol pour le dossier */
-.liste-tp li.dossier:hover {
-    transform: none; 
-}
-
-/* L'en-tête du dossier (qui remplace le <li> de base) */
-.dossier-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 25px; /* Recrée le padding du <li> original */
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-/* Ajoute un léger fond au survol de l'en-tête */
-.liste-tp li.dossier:hover .dossier-header {
-    background-color: rgba(101, 99, 255, 0.05);
-}
-
-/* Style du bouton pour déplier */
-.btn-toggle-dossier {
-    background-color: transparent;
-    color: var(--accent-lumiere);
-    border: 1px solid var(--accent-lumiere);
-    padding: 8px 15px;
-    border-radius: 5px;
-    font-weight: bold;
-    font-family: 'Source Code Pro', monospace;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9em;
-    white-space: nowrap;
-}
-
-.btn-toggle-dossier:hover {
-    background-color: var(--accent-lumiere);
-    color: var(--fond-profond);
-}
-
-/* La flèche */
-.btn-toggle-dossier .arrow {
-    display: inline-block;
-    margin-right: 8px;
-    transition: transform 0.3s ease;
-}
-
-/* Quand le dossier est ouvert (classe 'active' sur le bouton) */
-.btn-toggle-dossier.active .arrow {
-    transform: rotate(90deg); /* La flèche pivote */
-}
-
-/* La sous-liste qui contient les fichiers */
-.sous-liste-fichiers {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 0 20px; /* Indentation à gauche */
-    border-top: 1px solid var(--bordure-verre);
-    background: rgba(0,0,0, 0.2); /* Fond légèrement différent */
-    
-    /* L'astuce pour l'animation : cachée par défaut */
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-}
-
-/* Classe 'visible' ajoutée par le JS pour montrer la liste */
-.sous-liste-fichiers.visible {
-    max-height: 500px; /* Valeur assez grande pour contenir les fichiers */
-    transition: max-height 0.4s ease-in;
-    padding-bottom: 10px; /* Un peu d'espace en bas */
-}
-
-/* Style pour les <li> de la sous-liste */
-.sous-liste-fichiers li {
-    margin: 10px 20px 0 20px; /* Marge haut, droite/gauche */
-    border-color: rgba(101, 99, 255, 0.3); /* Bordure plus légère */
-}
-
-/* ==========================================================================
-   12. STYLES ICONES POUR BOUTONS VOIR/TELECHARGER (VERSION GLOW BLEU)
-   ========================================================================== */
-
-/* Style général (bouton invisible) */
-.btn-view, .btn-download {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 35px;
-    height: 35px;
-    padding: 0;
-    font-size: 0;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    cursor: pointer;
-    transition: all 0.2s ease-out;
-    text-decoration: none;
-    transform: none;
-}
-
-/* Les icônes elles-mêmes (état normal) */
-.btn-view img, .btn-download img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    
-    /* ### CORRECTION MAJEURE ###
-       On retire le filtre de base.
-       Vos icônes ont déjà la bonne couleur, pas besoin de les modifier.
-    */
-    filter: none; 
-    
-    /* On garde les transitions pour le filtre (glow) et la transformation (scale) */
-    transition: filter 0.2s ease-out, transform 0.2s ease-out;
-}
-
-/* Règle pour forcer le fond transparent au survol (corrige le bug du carré) */
-.btn-view:hover,
-.btn-download:hover {
-    background: transparent !important;
-    box-shadow: none !important;
-    transform: none;
-}
-
-/* ### NOUVEL EFFET DE SURVOL ###
-   On applique un "glow" (drop-shadow) de la couleur de l'icône
-   et on zoome légèrement.
-*/
-.btn-view:hover img,
-.btn-download:hover img {
-    /* Applique un "glow" (ombre portée) de la couleur --accent-lumiere */
-    filter: drop-shadow(0 0 8px var(--accent-lumiere));
-    
-    /* Ajoute un léger zoom pour le dynamisme */
-    transform: scale(1.15);
-}
-
-/* Conteneur des actions */
-.file-actions {
-    display: flex;
-    gap: 8px; /* Espace entre les icônes */
-    align: center;
-}
-
-/* ==========================================================================
-   13. STYLES VISIONNEUSE AVANCÉE ET DESCRIPTION DE FICHIER
-   ========================================================================== */
-
-/* --- Rendre le conteneur "relative" pour positionner le bouton "X" --- */
-.viewer-container {
-    position: relative; 
-}
-
-/* --- Le nouveau bouton "Fermer" (X) --- */
-.btn-close-viewer {
-    position: absolute;
-    top: 15px; /* Aligné avec le padding du conteneur */
-    right: 15px; /* Aligné avec le padding du conteneur */
-    z-index: 10; /* Au-dessus de l'iframe */
-    
-    width: 35px;
-    height: 35px;
-    padding: 0;
-    
-    background-color: var(--fond-profond); /* Fond sombre */
-    color: var(--texte-clair); /* Couleur du "X" */
-    
-    border: 1px solid var(--bordure-verre);
-    border-radius: 50%; /* Rond */
-    
-    font-family: 'Source Code Pro', monospace;
-    font-size: 24px; /* Taille du "X" */
-    line-height: 35px; /* Centre verticalement le "X" */
-    
-    cursor: pointer;
-    transition: all 0.3s ease;
-    
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
-
-.btn-close-viewer:hover {
-    background-color: var(--accent-lumiere);
-    color: var(--fond-profond);
-    transform: scale(1.1) rotate(90deg); /* Effet sympa au survol */
-    border-color: var(--accent-lumiere);
-}
-
-/* --- Structure pour les infos de fichier --- */
-/* (Ceci s'assure que le titre et la description sont à gauche) */
-.file-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Aligne le texte à gauche */
-    gap: 4px; /* Espace entre le titre et la description */
-}
-
-/* --- Style de la nouvelle description de fichier --- */
-.file-description {
-    font-size: 0.8em; /* Plus petit */
-    color: #B0B3C6; /* Couleur du texte secondaire */
-    opacity: 0.7; /* Légèrement estompé */
-    font-weight: 400;
-}
-
-/* ==========================================================================
-   14. NOUVELLE BOÎTE CONTACT MINIMALE
-   ========================================================================== */
-
-/* On cible la boîte de contact */
-.contact-box-simple {
-    padding: 30px 40px; /* Padding légèrement augmenté pour le titre */
-    max-width: 500px;
-    text-align: center; /* Centre le titre et la liste */
-}
-
-/* On cache les H2 et P par défaut de la section contact */
-#contact .glass-container h2,
-#contact .glass-container p {
-    display: none; 
-}
-
-/* Style du nouveau titre "Coordonnées" */
-.contact-box-simple h3 {
-    font-size: 1.6em;
-    color: var(--accent-lumiere);
-    margin-top: 0;
-    margin-bottom: 25px; /* Espace avant la liste */
-    text-shadow: 0 0 10px var(--accent-lumiere);
-}
-
-/* La liste de contact */
-.contact-list-simple {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: inline-block; /* Permet à la liste de se centrer */
-    text-align: left; /* Garde le texte des <li> aligné à gauche */
-}
-
-.contact-list-simple li {
-    display: flex;
-    align-items: center;
-    font-size: 1.1em;
-}
-.contact-list-simple li:first-child {
-    margin-bottom: 15px; 
-}
-
-.contact-list-simple .contact-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 15px;
-    filter: brightness(0) invert(1) saturate(100%) hue-rotate(240deg) brightness(1.2);
-}
-
-.contact-list-simple a {
-    text-decoration: none;
-    color: var(--texte-clair);
-    transition: color 0.3s ease;
-}
-
-.contact-list-simple a:hover {
-    color: var(--accent-lumiere);
-    text-decoration: underline;
-}
-
-/* ==========================================================================
-   15. COPYRIGHT FOOTER
-   ========================================================================== */
-
-.copyright {
-    text-align: center;
-    padding: 20px 15px;
-    font-size: 0.9em;
-    color: #B0B3C6; /* Couleur de texte secondaire */
-    opacity: 0.6;   /* Légèrement estompé pour rester discret */
-    background-color: var(--fond-profond); /* Garde le même fond sombre */
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* ==========================================================================
-   16. PAGE DE CONNEXION (LOGIN)
-   ========================================================================== */
-
-/* Conteneur principal de la page de connexion */
-.login-page {
-    width: 100%;
-    height: 100vh; /* Prend tout l'écran */
-    overflow: hidden; /* Empêche de scroller */
-    
-    /* Centre la boîte de connexion */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Positionne le fond Spline pour qu'il soit derrière */
-.login-page .spline-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-/* La boîte de connexion (au-dessus du fond) */
-.login-page .login-box {
-    width: 90%;
-    max-width: 450px;
-    position: relative;
-    z-index: 10;
-    text-align: center;
-}
-
-/* Adapte le H2 pour la boîte de connexion */
-.login-page .login-box h2 {
-    font-size: 2em; /* Plus petit que le H2 du contact */
-}
-
-/* Message d'erreur (caché par défaut) */
-.login-page .error-message {
-    display: none;
-    color: #ff6b6b; /* Rouge pour l'erreur */
-    font-size: 0.9em;
-    margin-top: 10px;
-    text-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
-}
-
-/* Animation de tremblement pour l'erreur */
-@keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-8px); }
-    50% { transform: translateX(8px); }
-    75% { transform: translateX(-8px); }
-    100% { transform: translateX(0); }
-}
-
-.login-box.shake {
-    animation: shake 0.5s ease-in-out;
-}
-
-/* --- Animation de sortie pour la boîte de connexion --- */
-
-/* Ajoute une transition à la boîte (pour l'animer en douceur) */
-/* Ajoute une transition à la boîte (pour l'animer en douceur) */
-.login-page .login-box {
-    /* ... */
-    /* On change "ease-in" en "ease-out" */
-    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
-}
-
-/* L'état "sortant" : descend et disparaît */
-/* L'état "sortant" : descend (ET RESTE VISIBLE) */
-/* L'état "sortant" : descend ET DISPARAÎT */
-.login-page .login-box.exiting {
-    transform: translateY(150px);
-    opacity: 0; /* On le remet ! */
-}
-
-/* ==========================================================================
-   17. ANIMATION "BIENVENUE"
-   ========================================================================== */
-
-.welcome-text {
-    /* Style */
-    font-size: 3.5em; /* Assez grand */
-    font-weight: 900;
-    color: var(--texte-clair);
-    text-shadow: 0 0 15px rgba(101, 99, 255, 0.4);
-    
-    /* Position (caché par défaut) */
-    position: absolute;
-    z-index: 5; /* En dessous du login-box (10), mais au-dessus du spline (1) */
-    opacity: 0;
-    
-    /* Prêt à monter */
-    transform: translateY(100px); 
-}
-
-/* L'animation "yoyo" (monte, pause, redescend) */
-@keyframes welcome-yoyo {
-    0% {
-        opacity: 0;
-        transform: translateY(100px); /* Commence en bas, caché */
-    }
-    30% {
-        opacity: 1;
-        transform: translateY(0); /* Monte au centre */
-    }
-    70% {
-        opacity: 1;
-        transform: translateY(0); /* Reste au centre (pause) */
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(100px); /* Redescend, caché */
-    }
-}
-
-/* La classe que le JavaScript ajoute pour déclencher l'animation */
-/* L'animation dure 1.5 secondes (1500ms) */
-.welcome-text.animate {
-    animation: welcome-yoyo 1.5s ease-in-out forwards;
-}
-
-.aesthetic-intro h1 {
-    color: var(--texte-clair);
-    font-size: 5vw;
-    font-weight: 900;
-    line-height: 0.9;
-    margin: 0;
-    text-transform: uppercase;
-    text-shadow: 4px 4px 0px rgba(5, 6, 24, 1); 
-    
-    /* ### LIGNE À AJOUTER ### */
-    animation: textFloatAnimation 3s ease-in-out infinite;
-}
-
-.aesthetic-intro .subtitle {
-    color: var(--accent-lumiere);
-    font-size: 1.2rem;
-    margin-top: 15px;
-    letter-spacing: 2px;
-    font-weight: 400;
-    text-shadow: 0 0 10px rgba(101, 99, 255, 0.4);
-    
-    /* ### LIGNE À AJOUTER (OPTIONNELLE) ### */
-    animation: textFloatAnimation 3s ease-in-out infinite;
-    animation-delay: 0.3s; /* Léger décalage */
-}
-
-/* ==========================================================================
-   18. MISE À JOUR CONTACT (2 Colonnes)
-   ========================================================================== */
-
-/* Wrapper pour les 2 colonnes */
-.contact-content-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start; /* Aligne en haut */
-    gap: 40px; /* Espace entre les colonnes */
-    width: 100%;
-    margin-top: 25px;
-}
-
-/* On ajuste le formulaire pour qu'il prenne sa place */
-.contact-form {
-    flex: 2; /* Le formulaire prend plus de place */
-    margin: 0; /* On retire la marge auto */
-}
-
-/* Nouvelle colonne de droite */
-.contact-details {
-    flex: 1; /* Les coordonnées prennent moins de place */
-    text-align: left;
-    padding-left: 30px;
-    border-left: 1px solid var(--bordure-verre); /* Ligne de séparation */
-    min-height: 250px;
-}
-
-.contact-details h3 {
-    font-size: 1.5em;
-    color: var(--accent-lumiere);
-    margin-top: 0;
-    margin-bottom: 25px;
-    text-shadow: 0 0 10px var(--accent-lumiere);
-}
-
-.contact-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.contact-list li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    font-size: 1.1em; /* "pas très grand" */
-}
-
-.contact-list .contact-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 15px;
-    /* On réutilise le filtre violet des autres icônes */
-    filter: brightness(0) invert(1) saturate(100%) hue-rotate(240deg) brightness(1.2);
-}
-
-.contact-list a {
-    text-decoration: none;
-    color: var(--texte-clair);
-    transition: color 0.3s ease;
-    word-break: break-all; /* Au cas où l'email est trop long */
-}
-
-.contact-list a:hover {
-    color: var(--accent-lumiere);
-    text-decoration: underline;
-}
-
-/* ==========================================================================
-   19. MISE À JOUR RESPONSIVE (Contact)
-   ========================================================================== */
-
-/* On ajoute cette règle DANS votre @media (max-width: 768px) existant */
-/* Si vous ne l'avez pas, ajoutez tout le bloc */
-@media (max-width: 768px) {
-    .contact-content-wrapper {
-        flex-direction: column; /* Les colonnes se superposent sur mobile */
-        gap: 30px;
-    }
-
+    /* Contact Responsive */
+    .contact-content-wrapper { flex-direction: column; gap: 30px; }
     .contact-details {
-        width: 100%;
-        border-left: none; /* On enlève la bordure verticale */
-        border-top: 1px solid var(--bordure-verre); /* On met une bordure horizontale */
-        padding-left: 0;
-        padding-top: 25px;
-        text-align: center; /* On centre sur mobile */
+        width: 100%; border-left: none; border-top: 1px solid var(--bordure-verre);
+        padding-left: 0; padding-top: 25px; text-align: center;
     }
-
-    .contact-list li {
-        justify-content: center; /* Centre les icônes et le texte */
-    }
-}
-
-/* ==========================================================================
-   19. MISE À JOUR VISUELLE SECTION COURS
-   ========================================================================== */
-
-/* On retire l'image du livre pour cette section */
-#cours .animated-book-gif {
-    display: none;
-}
-
-/* On force le conteneur de texte à prendre toute la largeur et à être centré */
-/* (Car il avait un style pour faire de la place au GIF) */
-#cours .cours-text-container {
-    max-width: 900px !important; /* Largeur max pour la grille */
-    margin: 0 auto !important;   /* Centre le conteneur */
-    text-align: center !important; /* Centre le H2 et le P */
-}
-
-/* La nouvelle grille pour les cartes de cours */
-.cours-grid {
-    display: grid;
-    /* Crée une grille de 2 colonnes sur grand écran, 1 sur petit */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px; /* Espace entre les cartes */
-    margin-top: 40px; /* Espace après le <p> */
-}
-
-/* La nouvelle carte de cours */
-.cours-card {
-    background: var(--transparence-verre);
-    border: 1px solid var(--bordure-verre);
-    border-radius: 12px;
-    padding: 30px 25px;
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centre tout */
-    text-align: center;
-    
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-.cours-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-    border-color: var(--accent-lumiere);
-}
-
-/* L'icône principale de la carte */
-.cours-card-icon {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 20px;
-    filter: drop-shadow(0 0 10px rgba(101, 99, 255, 0.3));
-}
-
-/* Le titre du fichier dans la carte */
-.cours-card .file-info {
-    align-items: center; /* Centre le <strong> */
-    margin-bottom: 20px;
-    flex-grow: 1; /* Pousse les boutons vers le bas */
-}
-
-.cours-card .file-info strong {
-    font-size: 1.25em;
-    color: var(--texte-clair);
-    line-height: 1.3;
-}
-
-/* Les boutons Voir/Télécharger dans la carte */
-.cours-card .file-actions {
-    justify-content: center; /* Centre les deux boutons */
-    width: 100%;
+    .contact-list li { justify-content: center; }
 }
