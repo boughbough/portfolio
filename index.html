@@ -9,21 +9,20 @@
 <body class="login-page">
 
     <div class="glass-container login-box page-entry-transition" id="login-box">
-        <h2>Portfolio</h2>
-        <p style="margin-bottom: 25px; opacity: 0.7; font-size: 0.9rem;">Espace sécurisé</p>
+        <h2>Portfolio - Accès</h2>
+        <p>Veuillez entrer le mot de passe pour continuer.</p>
         
         <form class="contact-form" id="login-form">
             <input type="password" id="password-input" placeholder="Mot de passe" required>
-            
-            <button type="submit" class="btn-login">
-                Accéder
+            <button type="submit" class="contact-email">
+                Entrer
             </button>
-            
-            <p class="error-message" id="error-message" style="margin-top: 15px;">Mot de passe incorrect.</p>
+            <p class="error-message" id="error-message">Mot de passe incorrect.</p>
         </form>
     </div>
 
     <h1 class="welcome-text" id="welcome-text">Bienvenue</h1>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -33,45 +32,50 @@
             const loginBox = document.getElementById('login-box');
             const welcomeText = document.getElementById('welcome-text');
 
-            const MOT_DE_PASSE = "93300"; 
+            const MOT_DE_PASSE = "93300"; // Changez "admin"
 
             loginForm.addEventListener('submit', (e) => {
                 e.preventDefault(); 
                 const passwordTry = passwordInput.value;
 
                 if (passwordTry === MOT_DE_PASSE) {
-                    // Succès
+                    // Mot de passe correct
                     errorMessage.style.display = 'none';
                     
-                    // Animation de sortie
+                    // 1. On retire l'animation d'entrée (corrige le bug)
                     loginBox.classList.remove('page-entry-transition');
                     
+                    // 2. On attend 0ms avant de lancer la sortie
                     setTimeout(() => {
                         loginBox.classList.add('exiting');
                     }, 0); 
                     
-                    // Texte Bienvenue
+                    // 3. On attend la fin de la sortie (600ms)
                     setTimeout(() => {
                         welcomeText.classList.add('animate');
                         
-                        // Redirection
+                        // 4. On attend la fin du "Bienvenue" (1500ms)
                         setTimeout(() => {
+                            
+                            // ### SÉCURITÉ AJOUTÉE ###
+                            // On "signe" la session pour la prochaine page
                             sessionStorage.setItem('isLoggedIn', 'true');
+                            // On dit à la prochaine page de jouer l'animation
                             sessionStorage.setItem('playEntryAnimation', 'true');
+                            
                             window.location.href = 'portfolio.html';
-                        }, 1500); 
+                            
+                        }, 1500); // Durée de "welcome-yoyo"
                         
-                    }, 600); 
+                    }, 600); // Durée de "exiting"
                 
                 } else {
-                    // Erreur
+                    // Mot de passe incorrect
                     errorMessage.style.display = 'block'; 
+                    // On retire l'animation d'entrée (corrige le bug du "shake")
                     loginBox.classList.remove('page-entry-transition');
                     loginBox.classList.add('shake'); 
                     
-                    passwordInput.value = ''; // Vide le champ
-                    passwordInput.focus();    // Remet le curseur dedans
-
                     setTimeout(() => {
                         loginBox.classList.remove('shake');
                     }, 500);
